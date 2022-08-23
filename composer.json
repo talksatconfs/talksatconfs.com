@@ -18,6 +18,8 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
         "meilisearch/meilisearch-php": "^0.24.2",
+        "spatie/laravel-responsecache": "^7.4",
+        "spatie/laravel-sitemap": "^6.2",
         "spatie/laravel-tags": "^4.3",
         "spatie/url": "^2.1"
     },
