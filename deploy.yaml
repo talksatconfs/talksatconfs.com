@@ -37,5 +37,5 @@ tasks:
       - run: 'cd {{release_path}} && npm run build'
 
 after:
-  deploy: artisan:horizon:terminate
+  # deploy: artisan:horizon:terminate
   deploy:failed: deploy:unlock
