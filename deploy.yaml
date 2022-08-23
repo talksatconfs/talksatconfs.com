@@ -29,7 +29,7 @@ tasks:
     - artisan:down
     - npm:install
     - npm:run:prod
-    - artisan:responsecache:clear
+    # - artisan:responsecache:clear
     - artisan:icon:cache
     - artisan:up
     - deploy:publish
