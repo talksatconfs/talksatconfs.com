@@ -33,6 +33,11 @@ class Conference extends AbstractTacModel
 
     protected $guarded = [];
 
+    public function getTagClassName(): string
+    {
+        return Tag::class;
+    }
+
     protected static function newFactory(): Factory
     {
         return ConferenceFactory::new();
@@ -96,6 +101,13 @@ class Conference extends AbstractTacModel
     public function talks(): HasManyThrough
     {
         return $this->hasManyThrough(Talk::class, Event::class);
+    }
+
+    public function tags()
+    {
+        return $this
+            ->morphToMany(self::getTagClassName(), 'taggable', 'taggables', null, 'tag_id')
+            ->orderBy('order_column');
     }
 
     public function scopeDetails(Builder $query): void

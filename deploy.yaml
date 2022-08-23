@@ -1,0 +1,41 @@
+import:
+    - recipe/laravel.php
+    - contrib/php-fpm.php
+    - contrib/npm.php
+    - deploy/generate-sitemap.php
+    - deploy/icon-cache.php
+    - deploy/response-cache.php
+    - deploy/horizon-terminate.php
+    - deploy/migrate.php
+
+config:
+  application: 'talksatconfs.com'
+  repository: 'git@github.com:talksatconfs/talksatconfs.com.git'
+  php_fpm_version: '8.1'
+
+hosts:
+  '5.161.93.164':
+    hostname: '5.161.93.164'
+    remote_user: forge
+    identity_file: ~/.ssh/id_forge
+    deploy_path: '/home/forge/talksatconfs.com'
+
+tasks:
+  deploy:
+    - deploy:prepare
+    - deploy:vendors
+    - artisan:storage:link
+    - artisan:optimize
+    - artisan:down
+    - npm:install
+    - npm:run:prod
+    - artisan:responsecache:clear
+    - artisan:icon:cache
+    - artisan:up
+    - deploy:publish
+  npm:run:prod:
+      - run: 'cd {{release_path}} && npm run build'
+
+after:
+  deploy: artisan:horizon:terminate
+  deploy:failed: deploy:unlock
