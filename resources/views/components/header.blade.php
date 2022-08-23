@@ -11,39 +11,39 @@
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         <!-- HERCurrent: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <x-nav-link
+                        <x-nav-a
                             :href="route('homepage')"
                             :active="request()->routeIs('homepage')">
                             Home
-                        </x-nav-link>
+                        </x-nav-a>
 
-                        <x-nav-link
+                        <x-nav-a
                             :href="route('conferences.index')"
                             :active="request()->routeIs('conferences.index')">
                             Conferences
-                        </x-nav-link>
+                        </x-nav-a>
 
-                        <x-nav-link
+                        <x-nav-a
                             :href="route('events.index')"
                             :active="request()->routeIs('events.index')">
                             Events
-                        </x-nav-link>
+                        </x-nav-a>
 
-                        <x-nav-link
+                        <x-nav-a
                             :href="route('talks.index')"
                             :active="request()->routeIs('talks.index')">
                             Talks
-                        </x-nav-link>
-                        <x-nav-link
+                        </x-nav-a>
+                        <x-nav-a
                             :href="route('speakers.index')"
                             :active="request()->routeIs('speakers.index')">
                             Speakers
-                        </x-nav-link>
-                        <x-nav-link
+                        </x-nav-a>
+                        <x-nav-a
                             :href="route('about-us')"
                             :active="request()->routeIs('about-us')">
                             About Us
-                        </x-nav-link>
+                        </x-nav-a>
                     </div>
                 </div>
             </div>
@@ -126,36 +126,36 @@
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 
 
-            <x-nav-link class="block"
+            <x-nav-a class="block"
                 :href="route('homepage')"
                 :active="request()->routeIs('homepage')">
                 Home
-            </x-nav-link>
-            <x-nav-link class="block"
+            </x-nav-a>
+            <x-nav-a class="block"
                 :href="route('conferences.index')"
                 :active="request()->routeIs('conferences.index')">
                 Conferences
-            </x-nav-link>
-            <x-nav-link class="block"
+            </x-nav-a>
+            <x-nav-a class="block"
                 :href="route('events.index')"
                 :active="request()->routeIs('events.index')">
                 Events
-            </x-nav-link>
-            <x-nav-link class="block"
+            </x-nav-a>
+            <x-nav-a class="block"
                 :href="route('talks.index')"
                 :active="request()->routeIs('talks.index')">
                 Talks
-            </x-nav-link>
-            <x-nav-link class="block"
+            </x-nav-a>
+            <x-nav-a class="block"
                 :href="route('speakers.index')"
                 :active="request()->routeIs('speakers.index')">
                 Speakers
-            </x-nav-link>
-            <x-nav-link class="block"
+            </x-nav-a>
+            <x-nav-a class="block"
                 :href="route('about-us')"
                 :active="request()->routeIs('about-us')">
                 About Us
-            </x-nav-link>
+            </x-nav-a>
 
         </div>
         <div class="pt-4 pb-3 border-t border-gray-700">

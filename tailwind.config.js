@@ -1,5 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
@@ -15,10 +16,5 @@ module.exports = {
         },
     },
 
-    plugins: [
-        require("@tailwindcss/aspect-ratio"),
-        require("@tailwindcss/line-clamp"),
-        require("@tailwindcss/forms"),
-        require("@tailwindcss/typography"),
-    ],
+    plugins: [require('@tailwindcss/forms')],
 };
