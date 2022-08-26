@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
             'event' => 'Domain\TalksAtConfs\Models\Event',
             'talk' => 'Domain\TalksAtConfs\Models\Talk',
             'video' => 'Domain\TalksAtConfs\Models\Video',
+            'user' => 'App\Models\User',
         ]);
     }
 }
