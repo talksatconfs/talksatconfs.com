@@ -3,6 +3,7 @@
 namespace Domain\TalksAtConfs\Models;
 
 use Carbon\CarbonInterval;
+use Domain\TalksAtConfs\Contracts\UuidForModel;
 use Domain\TalksAtConfs\Database\Factories\VideoFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -25,6 +26,7 @@ class Video extends AbstractTacModel
 {
     use HasFactory;
     use Searchable;
+    use UuidForModel;
 
     protected $guarded = [];
 

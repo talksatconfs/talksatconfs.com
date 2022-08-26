@@ -2,6 +2,7 @@
 
 namespace Domain\TalksAtConfs\Models;
 
+use Domain\TalksAtConfs\Contracts\UuidForModel;
 use Domain\TalksAtConfs\Database\Factories\TalkFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -27,6 +28,7 @@ class Talk extends AbstractTacModel
 {
     use HasFactory;
     use Searchable;
+    use UuidForModel;
 
     protected $guarded = [];
 
