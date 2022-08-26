@@ -9,7 +9,7 @@ return [
     ],
 
     'name' => env('TAC_APP_NAME', 'talksatconfs.com'),
-    'sitemap_path' => 'sitemaps/tac',
+    'sitemap_path' => 'sitemaps',
 
     'conferences' => [
         'messages' => [

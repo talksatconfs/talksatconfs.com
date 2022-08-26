@@ -2,8 +2,8 @@
 
 namespace Deployer;
 
-desc('Run "php artisan cat3:tac-sitemap" on the host.');
-task('artisan:cat3:tac-sitemap', function () {
+desc('Run "php artisan tac:generate-sitemap" on the host.');
+task('artisan:tac:generate-sitemap', function () {
     cd('{{release_path}}');
-    run('php artisan cat3:tac-sitemap');
+    run('php artisan tac:generate-sitemap');
 });
