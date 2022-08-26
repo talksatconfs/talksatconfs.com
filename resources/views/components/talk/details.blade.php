@@ -10,7 +10,7 @@
                 @if(!empty($video))
                     <div
                         class="block top-0 w-full bg-center bg-cover h-64 aspect-w-16 aspect-h-9 relative embed-responsive overflow-hidden">
-                        <x-tac.talk.video :video="$talk->videos->first()" :start-time="$talk->video_start_time" />
+                        <x-talk.video :video="$talk->videos->first()" :start-time="$talk->video_start_time" />
                     </div>
                 @else
                     <div class="m-4 p-2">

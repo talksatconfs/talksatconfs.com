@@ -8,6 +8,7 @@
         "php": "^8.0.2",
         "blade-ui-kit/blade-ui-kit": "^0.3.4",
         "codeat3/blade-phosphor-icons": "^1.4",
+        "deployer/deployer": "v8.x-dev",
         "diglactic/laravel-breadcrumbs": "^8.0",
         "guzzlehttp/guzzle": "^7.2",
         "http-interop/http-factory-guzzle": "^1.2",
@@ -17,10 +18,14 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
         "meilisearch/meilisearch-php": "^0.24.2",
+        "spatie/laravel-responsecache": "^7.4",
+        "spatie/laravel-sitemap": "^6.2",
+        "spatie/laravel-tags": "^4.3",
         "spatie/url": "^2.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
+        "barryvdh/laravel-ide-helper": "^2.12",
         "codeat3/phpcs-styles": "^1.2",
         "fakerphp/faker": "^1.9.1",
         "laravel/breeze": "^1.12",
@@ -28,6 +33,9 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-laravel": "^1.2",
+        "pestphp/pest-plugin-parallel": "^1.2",
         "phpunit/phpunit": "^9.5.10",
         "spatie/laravel-ignition": "^1.0"
     },

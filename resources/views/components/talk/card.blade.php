@@ -4,7 +4,7 @@
     @endphp
     @if(! empty($video))
         <div class="block rounded-tr-lg rounded-tl-lg w-full h-64 bg-white bg-center bg-cover aspect-w-16 aspect-h-5 relative embed-responsive group-hover:opacity-95 overflow-hidden text-white">
-            <x-tac.talk.video :video="$video" :start-time="$talk->video_start_time" />
+            <x-talk.video :video="$video" :start-time="$talk->video_start_time" />
         </div>
     @else
         <div class="block border-b border-gray-300 rounded-tr-lg rounded-tl-lg w-full bg-center bg-cover h-64 aspect-w-16 aspect-h-5 overflow-hidden">

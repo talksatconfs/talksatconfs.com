@@ -2,6 +2,7 @@
 
 namespace Domain\TalksAtConfs\Models;
 
+use Domain\TalksAtConfs\Contracts\UuidForModel;
 use Domain\TalksAtConfs\Database\Factories\SpeakerFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -26,6 +27,7 @@ class Speaker extends AbstractTacModel
 {
     use HasFactory;
     use Searchable;
+    use UuidForModel;
 
     protected $guarded = [];
 

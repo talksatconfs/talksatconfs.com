@@ -2,15 +2,16 @@
 
 namespace Domain\TalksAtConfs\Models;
 
-use Domain\TalksAtConfs\Database\Factories\ConferenceFactory;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
+use Domain\TalksAtConfs\Contracts\UuidForModel;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Domain\TalksAtConfs\Database\Factories\ConferenceFactory;
 
 /**
  * Domain\TalksAtConfs\Models\Conference
@@ -30,8 +31,14 @@ class Conference extends AbstractTacModel
     use HasFactory;
     use Notifiable;
     use Searchable;
+    use UuidForModel;
 
     protected $guarded = [];
+
+    public function getTagClassName(): string
+    {
+        return Tag::class;
+    }
 
     protected static function newFactory(): Factory
     {
@@ -96,6 +103,13 @@ class Conference extends AbstractTacModel
     public function talks(): HasManyThrough
     {
         return $this->hasManyThrough(Talk::class, Event::class);
+    }
+
+    public function tags()
+    {
+        return $this
+            ->morphToMany(self::getTagClassName(), 'taggable', 'taggables', null, 'tag_id')
+            ->orderBy('order_column');
     }
 
     public function scopeDetails(Builder $query): void
