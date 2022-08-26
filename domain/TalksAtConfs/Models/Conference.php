@@ -2,16 +2,16 @@
 
 namespace Domain\TalksAtConfs\Models;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Laravel\Scout\Searchable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Builder;
 use Domain\TalksAtConfs\Contracts\UuidForModel;
+use Domain\TalksAtConfs\Database\Factories\ConferenceFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Domain\TalksAtConfs\Database\Factories\ConferenceFactory;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 
 /**
  * Domain\TalksAtConfs\Models\Conference
