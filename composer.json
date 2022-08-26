@@ -16,6 +16,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/scout": "^9.4",
         "laravel/tinker": "^2.7",
+        "laravolt/avatar": "^4.1",
         "livewire/livewire": "^2.10",
         "meilisearch/meilisearch-php": "^0.24.2",
         "spatie/laravel-responsecache": "^7.4",
