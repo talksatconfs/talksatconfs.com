@@ -29,6 +29,7 @@ tasks:
     - artisan:down
     - npm:install
     - npm:run:prod
+    - artisan:tac:generate-sitemap
     # - artisan:responsecache:clear
     - artisan:icon:cache
     - artisan:up
