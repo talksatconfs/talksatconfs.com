@@ -111,8 +111,17 @@ class Talk extends AbstractTacModel
     {
         $query->select(['id', 'title', 'slug', 'description', 'link', 'talk_date', 'video_start_time', 'event_id'])
         ->with(['videos', 'speakers', 'event'])
-        ->withCount('videos')
-        ->orderByDesc('talk_date');
+        ->withCount('videos');
+    }
+
+    public function scopeSortByTalkDate(Builder $query): void
+    {
+        $query->orderByDesc('talk_date');
+    }
+
+    public function scopeSortByCreatedDate(Builder $query): void
+    {
+        $query->orderByDesc('created_at');
     }
 
     public function searchableAs(): string
