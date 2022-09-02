@@ -109,8 +109,14 @@ class Talk extends AbstractTacModel
 
     public function scopeDetails(Builder $query): void
     {
-        $query->select(['id', 'title', 'slug', 'description', 'link', 'talk_date', 'video_start_time', 'event_id'])
-        ->with(['videos', 'speakers', 'event'])
+        $query->select([
+            'id', 'title', 'slug',
+            'description', 'link', 'talk_date',
+            'video_start_time', 'event_id',
+        ])
+        ->with([
+            'videos', 'speakers', 'event',
+        ])
         ->withCount('videos');
     }
 
@@ -130,7 +136,7 @@ class Talk extends AbstractTacModel
     }
 
     /**
-     * @psalm-return array{id: mixed, uuid: mixed, title: mixed, link: mixed, talk_date: mixed, speakers: mixed, speaker_ids: mixed, event_id: mixed, event_name: mixed, event_location: mixed, conference: mixed, conference_id: mixed}
+     * @psalm-return array{id: integer, uuid: string, title: string, link: string, talk_date: mixed, speakers: mixed, speaker_ids: mixed, event_id: mixed, event_name: mixed, event_location: mixed, conference: mixed, conference_id: mixed}
      */
     public function toSearchableArray(): array
     {
