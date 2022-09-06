@@ -3,15 +3,16 @@
 namespace Domain\TalksAtConfs\Models;
 
 use Carbon\CarbonInterval;
-use Domain\TalksAtConfs\Contracts\UuidForModel;
-use Domain\TalksAtConfs\Database\Factories\VideoFactory;
+use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Builder;
+use Domain\TalksAtConfs\Contracts\UuidForModel;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Domain\TalksAtConfs\Database\Factories\VideoFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Laravel\Scout\Searchable;
 
 /**
  * Domain\TalksAtConfs\Models\Video
@@ -58,8 +59,12 @@ class Video extends AbstractTacModel
         if (in_array($this->source, ['youtube', 'www.youtube.com'])) {
             return 'https://www.youtube.com/embed/' . $this->key;
         }
-        if ($this->source === 'vimeo') {
-            return 'https://player.vimeo.com/video/' . $this->key . '?color=0c88dd&title=0&byline=0&portrait=0&badge=0';
+        if (in_array($this->source, ['vimeo', 'vimeo.com'])) {
+            if (Str::contains($this->key, 'showcase')) {
+                return 'https://player.vimeo.com/video/' . Str::after($this->key, 'video/') . '?color=0c88dd&title=0&byline=0&portrait=0&badge=0';
+            } else {
+                return 'https://player.vimeo.com/video/' . $this->key . '?color=0c88dd&title=0&byline=0&portrait=0&badge=0';
+            }
         }
     }
 
