@@ -3,16 +3,16 @@
 namespace Domain\TalksAtConfs\Models;
 
 use Carbon\CarbonInterval;
-use Illuminate\Support\Str;
-use Laravel\Scout\Searchable;
-use Illuminate\Database\Eloquent\Builder;
 use Domain\TalksAtConfs\Contracts\UuidForModel;
+use Domain\TalksAtConfs\Database\Factories\VideoFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Domain\TalksAtConfs\Database\Factories\VideoFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 
 /**
  * Domain\TalksAtConfs\Models\Video
