@@ -12,13 +12,18 @@ config:
   application: 'talksatconfs.com'
   repository: 'git@github.com:talksatconfs/talksatconfs.com.git'
   php_fpm_version: '8.1'
+  remote_user: forge
+  base_deploy_path: '/home/forge'
 
 hosts:
-  '5.161.93.164':
+  'production':
     hostname: '5.161.93.164'
-    remote_user: forge
     identity_file: ~/.ssh/id_forge
-    deploy_path: '/home/forge/talksatconfs.com'
+    deploy_path: '{{base_deploy_path}}/talksatconfs.com'
+  'staging':
+    hostname: '5.161.93.164'
+    identity_file: ~/.ssh/id_forge
+    deploy_path: '{{base_deploy_path}}/staging.talksatconfs.com'
 
 tasks:
   deploy:
