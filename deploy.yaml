@@ -18,10 +18,12 @@ config:
 hosts:
   'production':
     hostname: '5.161.93.164'
+    branch: main
     identity_file: ~/.ssh/id_forge
     deploy_path: '{{base_deploy_path}}/talksatconfs.com'
   'staging':
     hostname: '5.161.93.164'
+    branch: staging
     identity_file: ~/.ssh/id_forge
     deploy_path: '{{base_deploy_path}}/staging.talksatconfs.com'
 
@@ -31,6 +33,7 @@ tasks:
     - deploy:vendors
     - artisan:storage:link
     - artisan:optimize
+    - artisan:view:cache
     - artisan:down
     - npm:install
     - npm:run:prod
