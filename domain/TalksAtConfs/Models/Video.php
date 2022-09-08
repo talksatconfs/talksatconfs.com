@@ -63,6 +63,7 @@ class Video extends AbstractTacModel
             if (Str::contains($this->key, 'showcase')) {
                 return 'https://player.vimeo.com/video/' . Str::after($this->key, 'video/') . '?color=0c88dd&title=0&byline=0&portrait=0&badge=0';
             }
+
             return 'https://player.vimeo.com/video/' . $this->key . '?color=0c88dd&title=0&byline=0&portrait=0&badge=0';
         }
     }

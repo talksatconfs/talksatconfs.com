@@ -2,7 +2,6 @@
 
 namespace Domain\TalksAtConfs\Nova\Lenses;
 
-use Domain\TalksAtConfs\Nova\Filters\SpeakerBySocialId;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
