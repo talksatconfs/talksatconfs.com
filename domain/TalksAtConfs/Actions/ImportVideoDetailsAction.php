@@ -16,9 +16,7 @@ class ImportVideoDetailsAction
             'video-' . implode('-', $ids),
             now()->addDay(),
             function () use ($ids) {
-                $result = Youtube::getVideoInfo($ids);
-
-                return $result;
+                return Youtube::getVideoInfo($ids);
             }
         );
     }

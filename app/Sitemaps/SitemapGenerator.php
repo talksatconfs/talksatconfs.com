@@ -51,6 +51,6 @@ class SitemapGenerator
             );
         });
 
-        $this->sitemapIndex->writeToFile(public_path('/' . 'sitemap.xml'));
+        $this->sitemapIndex->writeToFile(public_path('/sitemap.xml'));
     }
 }

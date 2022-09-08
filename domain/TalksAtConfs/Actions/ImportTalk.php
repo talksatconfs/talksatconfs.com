@@ -74,11 +74,6 @@ class ImportTalk
         return $url->getPath();
     }
 
-    /**
-     * @return string[]
-     *
-     * @psalm-return non-empty-list<string>
-     */
     private function getSpeakerNames($speakers): array
     {
         return explode('&', $speakers);

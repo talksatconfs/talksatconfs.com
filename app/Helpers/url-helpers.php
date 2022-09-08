@@ -24,7 +24,7 @@ if (! function_exists('website_host')) {
         if (count(array_filter($url->getSegments())) === 0) {
             $host = $url->getHost();
 
-            return ($trimWww) ? Str::after($host, 'www.') : $host;
+            return $trimWww ? Str::after($host, 'www.') : $host;
         }
 
         return $url->getHost() . $url->getPath();

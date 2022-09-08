@@ -51,9 +51,9 @@ class Talk extends AbstractTacModel
     public function getCanonicalUrlAttribute(): string
     {
         return route('talks.show', [
-                'event' => $this->event->slug,
-                'talk' => $this->slug,
-            ]);
+            'event' => $this->event->slug,
+            'talk' => $this->slug,
+        ]);
     }
 
     public function conference(): HasOneThrough

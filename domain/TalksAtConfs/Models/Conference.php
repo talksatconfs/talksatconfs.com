@@ -70,16 +70,22 @@ class Conference extends AbstractTacModel
         return Arr::get($channelData, 1);
     }
 
+    public function getChannelSourceAttribute()
+    {
+        return Arr::get(explode(':', $this->channel), '0');
+    }
+
+    public function getChannelKeyAttribute()
+    {
+        return Arr::get(explode(':', $this->channel), '1');
+    }
+
     public function getChannelUrlAttribute()
     {
-        $channelData = explode(':', $this->channel);
-
-        if ($channelData[0] === 'youtube' && count($channelData) === 2) {
-            return 'https://www.youtube.com/channel/' . $channelData[1];
-        }
-
-        if ($channelData[0] === 'vimeo' && count($channelData) === 2) {
-            return 'https://vimeo.com/channels/' . $channelData[1];
+        if (in_array($this->channelSource, ['youtube', 'vimeo'])) {
+            return $this->channelSource === 'youtube'
+                ? 'https://www.youtube.com/channel/' . $this->channelKey
+                : 'https://vimeo.com/channels/' . $this->channelKey;
         }
 
         if (Str::startsWith($this->channel, 'UC')) {

@@ -49,41 +49,6 @@ class MostSpeakerTalks extends Lens
     }
 
     /**
-     * Get the cards available on the lens.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function cards(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the filters available for the lens.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function filters(Request $request)
-    {
-        return [
-            new SpeakerBySocialId(),
-        ];
-    }
-
-    /**
-     * Get the actions available on the lens.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function actions(Request $request)
-    {
-        return parent::actions($request);
-    }
-
-    /**
      * Get the URI key for the lens.
      *
      * @return string

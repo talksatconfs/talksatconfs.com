@@ -22,7 +22,7 @@ class TalkRedirectController extends Controller
     {
         $talks = Talk::whereSlug($slug)->paginate(10) ?? Talk::search($slug)->paginate(10);
 
-        if ($talks->count() == 1) {
+        if ($talks->count() === 1) {
             $talk = $talks->first();
             if (! is_null($talk)) {
                 return response()->redirectTo($talk->canonical_url, 301);
