@@ -44,7 +44,13 @@ class ImportTalks
     {
         $talkAttrs = collect($talkData)
             ->only(['title', 'time', 'description'])
+<<<<<<< HEAD
             ->filter(fn ($v) => ! empty($v))
+=======
+            ->filter(function ($v) {
+                return ! empty($v);
+            })
+>>>>>>> 133042f (insights + enlightn fixes)
             ->toArray();
 
         if ($talkAttrs['time'] ?? false) {
@@ -72,7 +78,13 @@ class ImportTalks
     {
         $speakerAction = new AddSpeaker();
         $speakers = collect($talkData['authors'])
+<<<<<<< HEAD
             ->map(fn ($speaker) => $speakerAction->handle($speaker)->id);
+=======
+            ->map(function ($speaker) use ($speakerAction) {
+                return $speakerAction->handle($speaker)->id;
+            });
+>>>>>>> 133042f (insights + enlightn fixes)
         $talk->speakers()->sync($speakers);
     }
 
