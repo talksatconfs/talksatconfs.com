@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
 
-class Channel extends AbstractTacModel
+class Channel extends TacModel
 {
     use HasFactory;
     use Searchable;

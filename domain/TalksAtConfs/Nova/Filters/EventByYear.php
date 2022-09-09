@@ -38,11 +38,11 @@ class EventByYear extends Filter
     public function options(Request $request)
     {
         return Event::select([DB::raw('DISTINCT(YEAR(`from_date`)) AS event_year')])
-        ->orderBy(DB::raw('YEAR(`from_date`)'))
-        ->get()
-        ->mapWithKeys(function ($row) {
-            return [$row->getAttribute('event_year') => $row->getAttribute('event_year')];
-        })
-        ->toArray();
+            ->orderBy(DB::raw('YEAR(`from_date`)'))
+            ->get()
+            ->mapWithKeys(function ($row) {
+                return [$row->getAttribute('event_year') => $row->getAttribute('event_year')];
+            })
+            ->toArray();
     }
 }

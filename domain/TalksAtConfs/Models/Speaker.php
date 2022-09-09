@@ -23,7 +23,7 @@ use Laravel\Scout\Searchable;
  * @property string $bio
  * @property string $website
  */
-class Speaker extends AbstractTacModel
+class Speaker extends TacModel
 {
     use HasFactory;
     use Searchable;

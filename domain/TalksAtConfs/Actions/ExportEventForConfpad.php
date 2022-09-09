@@ -9,7 +9,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class ExportEventForConfpad
 {
-    const CONF_DIR_NAME = './conferences/';
+    public const CONF_DIR_NAME = './conferences/';
 
     public function __construct(protected $event_id)
     {
@@ -25,38 +25,15 @@ class ExportEventForConfpad
 
         $talkData = $event->talks->map(function ($talk) {
             return [
-                    'title' => $talk->title,
-                    'lang' => 'en',
-                    'type' => 'regular',
-                    'time' => Str::replace(' 00:00:00', '', $talk->talk_date->format('Y-m-d H:i:s')),
-                    'authors' => $talk
-                        ->speakers()
-                        ->get()
-                        ->mapWithKeys(function ($speaker) {
-                            return [
-                                'name' => $speaker->name,
-                                'twitter' => $speaker->twitter,
-                                'github' => $speaker->github,
-                                'website' => $speaker->website,
-                            ];
-                        })
-                        ->toArray(),
-                    'slides' => $talk
-                        ->slides()
-                        ->get()
-                        ->map(function ($slide) {
-                            return $slide->link;
-                        })
-                        ->toArray(),
-                    'videos' => $talk
-                        ->videos()
-                        ->get()
-                        ->map(function ($video) {
-                            return $video->video_link;
-                        })
-                        ->toArray(),
-                    'description' => $talk->description,
-                ];
+                'title' => $talk->title,
+                'lang' => 'en',
+                'type' => 'regular',
+                'time' => Str::replace(' 00:00:00', '', $talk->talk_date->format('Y-m-d H:i:s')),
+                'authors' => $this->getAuthors($talk),
+                'slides' => $this->getSlides($talk),
+                'videos' => $this->getVideos($talk),
+                'description' => $talk->description,
+            ];
         })->toArray();
 
         $yamlData['conference'] = [
@@ -84,13 +61,51 @@ class ExportEventForConfpad
         $filePath = './' . self::CONF_DIR_NAME . '/' . $event->from_date->format('Y') . '/' . $event->from_date->format('Y-m-d') . '-' . $event->slug . '.yaml';
 
         Storage::disk('confpad-data')
-                        ->put(
-                            $filePath,
-                            Yaml::dump(
-                                $yamlData,
-                                5,
-                                2,
-                            )
-                        );
+            ->put(
+                $filePath,
+                Yaml::dump(
+                    $yamlData,
+                    5,
+                    2,
+                )
+            );
+    }
+
+    private function getAuthors($talk)
+    {
+        return $talk
+            ->speakers()
+            ->get()
+            ->mapWithKeys(function ($speaker) {
+                return [
+                    'name' => $speaker->name,
+                    'twitter' => $speaker->twitter,
+                    'github' => $speaker->github,
+                    'website' => $speaker->website,
+                ];
+            })
+            ->toArray();
+    }
+
+    private function getSlides($talk)
+    {
+        return $talk
+            ->slides()
+            ->get()
+            ->map(function ($slide) {
+                return $slide->link;
+            })
+            ->toArray();
+    }
+
+    private function getVideos($talk)
+    {
+        return $talk
+            ->videos()
+            ->get()
+            ->map(function ($video) {
+                return $video->video_link;
+            })
+            ->toArray();
     }
 }

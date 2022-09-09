@@ -26,7 +26,7 @@ use Laravel\Scout\Searchable;
  * @property string $website
  * @property string $youtube
  */
-class Conference extends AbstractTacModel
+class Conference extends TacModel
 {
     use HasFactory;
     use Notifiable;

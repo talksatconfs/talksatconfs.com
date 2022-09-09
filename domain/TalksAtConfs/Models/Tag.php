@@ -6,6 +6,7 @@ use Domain\TalksAtConfs\Database\Factories\TagFactory;
 use Domain\TalksAtConfs\Nova\Resources\Conference;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\Tags\Tag as TagsTag;
 
 class Tag extends TagsTag
@@ -22,10 +23,7 @@ class Tag extends TagsTag
         return TagFactory::new();
     }
 
-    /**
-     * Get all of the conferences that are assigned this tag.
-     */
-    public function conferences()
+    public function conferences(): MorphToMany
     {
         return $this->morphedByMany(Conference::class, 'taggable');
     }

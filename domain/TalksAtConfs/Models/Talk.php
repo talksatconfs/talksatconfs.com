@@ -24,7 +24,7 @@ use Laravel\Scout\Searchable;
  * @property mixed $talk_date
  * @property string $link
  */
-class Talk extends AbstractTacModel
+class Talk extends TacModel
 {
     use HasFactory;
     use Searchable;
@@ -135,9 +135,6 @@ class Talk extends AbstractTacModel
         return 'talks_index';
     }
 
-    /**
-     * @psalm-return array{id: integer, uuid: string, title: string, link: string, talk_date: mixed, speakers: mixed, speaker_ids: mixed, event_id: mixed, event_name: mixed, event_location: mixed, conference: mixed, conference_id: mixed}
-     */
     public function toSearchableArray(): array
     {
         $event = $this->event()->first();

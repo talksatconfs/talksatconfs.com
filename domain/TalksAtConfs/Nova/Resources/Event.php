@@ -83,17 +83,6 @@ class Event extends Resource
     }
 
     /**
-     * Get the cards available for the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function cards(Request $request)
-    {
-        return [];
-    }
-
-    /**
      * Get the filters available for the resource.
      *
      * @param  \Illuminate\Http\Request  $request

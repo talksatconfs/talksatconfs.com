@@ -23,15 +23,28 @@ class ImportTalk
         ]);
 
         // syncing speakers
-        $speakerAction = new AddSpeaker();
-        $speakers = collect($this->getSpeakerNames(Arr::get($this->data, 'speakers')))
-            ->map(function ($speaker) use ($speakerAction) {
-                return $speakerAction->handle(['name' => $speaker])->id;
-            });
-
+        $speakers = $this->syncSpeakers();
         $talk->speakers()->sync($speakers->toArray());
 
         // syncing videos
+        $this->syncVideos($talk);
+
+        // syncing slides
+        $this->syncSlides($talk);
+    }
+
+    private function syncSpeakers()
+    {
+        $speakerAction = new AddSpeaker();
+
+        return collect($this->getSpeakerNames(Arr::get($this->data, 'speakers')))
+            ->map(function ($speaker) use ($speakerAction) {
+                return $speakerAction->handle(['name' => $speaker])->id;
+            });
+    }
+
+    private function syncVideos($talk)
+    {
         if (! empty(Arr::get($this->data, 'talk_video'))) {
             $videoMeta = $this->getVideoMeta(Arr::get($this->data, 'talk_video'));
             $video = (new AddVideo())->handle([
@@ -40,8 +53,10 @@ class ImportTalk
             ]);
             $talk->videos()->sync([$video->id]);
         }
+    }
 
-        // syncing slides
+    private function syncSlides($talk)
+    {
         if (! empty(Arr::get($this->data, 'talk_slide'))) {
             (new AddSlide())->handle([
                 'talk_id' => $talk->id,
@@ -50,9 +65,6 @@ class ImportTalk
         }
     }
 
-    /**
-     * @psalm-return array{source: mixed, key: mixed}
-     */
     private function getVideoMeta($url): array
     {
         $urlObj = Url::fromString($url);

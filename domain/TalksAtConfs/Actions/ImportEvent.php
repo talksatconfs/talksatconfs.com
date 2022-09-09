@@ -16,10 +16,7 @@ class ImportEvent
     {
     }
 
-    /**
-     * @return null|string
-     */
-    private function getPlaylistFromUrl($url)
+    private function getPlaylistFromUrl($url): string|null
     {
         if (! empty($url)) {
             $urlData = parse_url($url);

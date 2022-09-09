@@ -15,7 +15,7 @@ use Laravel\Scout\Searchable;
  * @property string $uuid
  * @property int $id
  */
-class Slide extends AbstractTacModel
+class Slide extends TacModel
 {
     use HasFactory;
     use Searchable;
