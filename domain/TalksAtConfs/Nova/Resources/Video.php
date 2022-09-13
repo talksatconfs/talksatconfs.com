@@ -55,11 +55,19 @@ class Video extends Resource
             Text::make('Title'),
             Number::make('Duration'),
 
+            ...$this->metaFields(),
+            ...$this->relationFields(),
+        ];
+    }
+
+    private function metaFields()
+    {
+        return [
             Text::make('Duration For Humans')
                 ->hideWhenUpdating()
                 ->hideWhenCreating(),
 
-            Text::make('Publisher At'),
+            Text::make('Published At'),
             Text::make('Description')
                 ->hideFromIndex(),
 
@@ -71,22 +79,16 @@ class Video extends Resource
                 ->hideWhenCreating()
                 ->hideWhenUpdating()
                 ->blank(),
+        ];
+    }
 
+    private function relationFields()
+    {
+        return [
             BelongsToMany::make('Talks')->searchable(),
 
             BelongsTo::make('Channel')->searchable(),
         ];
-    }
-
-    /**
-     * Get the cards available for the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function cards(Request $request)
-    {
-        return [];
     }
 
     /**
@@ -111,17 +113,6 @@ class Video extends Resource
      * @return array
      */
     public function lenses(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the actions available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function actions(Request $request)
     {
         return [];
     }

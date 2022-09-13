@@ -23,7 +23,7 @@ use Laravel\Scout\Searchable;
  * @property string $uuid
  * @property int $id
  */
-class Video extends AbstractTacModel
+class Video extends TacModel
 {
     use HasFactory;
     use Searchable;
@@ -51,10 +51,7 @@ class Video extends AbstractTacModel
         return $this->belongsTo(Channel::class);
     }
 
-    /**
-     * @return null|string
-     */
-    public function getVideoEmbedLinkAttribute()
+    public function getVideoEmbedLinkAttribute() : string|null
     {
         if (in_array($this->source, ['youtube', 'www.youtube.com'])) {
             return 'https://www.youtube.com/embed/' . $this->key;

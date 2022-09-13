@@ -51,17 +51,6 @@ class Speaker extends Resource
     }
 
     /**
-     * Get the cards available for the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function cards(Request $request)
-    {
-        return [];
-    }
-
-    /**
      * Get the filters available for the resource.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -85,16 +74,5 @@ class Speaker extends Resource
         return [
             new MostSpeakerTalks(),
         ];
-    }
-
-    /**
-     * Get the actions available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function actions(Request $request)
-    {
-        return [];
     }
 }

@@ -33,7 +33,7 @@ use Spatie\Url\Url;
  * @property mixed $from_date
  * @property mixed $to_date
  */
-class Event extends AbstractTacModel
+class Event extends TacModel
 {
     // use Actionable;
     use HasFactory;
@@ -82,21 +82,21 @@ class Event extends AbstractTacModel
     {
         $playlistData = explode(':', $this->playlist);
 
-        if (count($playlistData) === 2) {
-            if (in_array($playlistData[0], ['youtube', 'youtube.com', 'www.youtube.com'])) {
-                return 'https://www.youtube.com/playlist?list=' . $playlistData[1];
-            }
-
-            if (in_array($playlistData[0], ['vimeo', 'vimeo.com'])) {
-                return 'https://vimeo.com/album/' . $playlistData[1];
-            }
-
-            if (count($playlistData) === 2) {
-                return $playlistData[1];
-            }
+        if (count($playlistData) !== 2) {
+            return $this->playlist;
         }
 
-        return $this->playlist;
+        if (in_array($playlistData[0], ['youtube', 'youtube.com', 'www.youtube.com'])) {
+            return 'https://www.youtube.com/playlist?list=' . $playlistData[1];
+        }
+
+        if (in_array($playlistData[0], ['vimeo', 'vimeo.com'])) {
+            return 'https://vimeo.com/album/' . $playlistData[1];
+        }
+
+        if (count($playlistData) === 2) {
+            return $playlistData[1];
+        }
     }
 
     public function getPlaylistDisplayUrlAttribute(): Url
@@ -158,10 +158,10 @@ class Event extends AbstractTacModel
             'from_date', 'to_date',
             'conference_id',
         ])
-        // ->with(['tags', 'conference'])
-        ->with(['conference'])
-        ->withCount('talks')
-        ->orderByDesc('from_date');
+            // ->with(['tags', 'conference'])
+            ->with(['conference'])
+            ->withCount('talks')
+            ->orderByDesc('from_date');
     }
 
     public function searchableAs(): string
