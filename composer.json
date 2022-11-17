@@ -35,6 +35,7 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
+        "nunomaduro/larastan": "^2.2",
         "nunomaduro/phpinsights": "^2.5",
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-laravel": "^1.2",
@@ -74,7 +75,8 @@
             "@php artisan key:generate --ansi"
         ],
         "format": "vendor/bin/php-cs-fixer fix",
-        "test": "@php artisan test --parallel"
+        "test": "@php artisan test --parallel",
+        "testcoverage": "@php artisan test --coverage"
     },
     "extra": {
         "laravel": {
