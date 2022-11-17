@@ -74,7 +74,8 @@
             "@php artisan key:generate --ansi"
         ],
         "format": "vendor/bin/php-cs-fixer fix",
-        "test": "@php artisan test --parallel"
+        "test": "@php artisan test --parallel",
+        "testcoverage": "@php artisan test --coverage"
     },
     "extra": {
         "laravel": {
