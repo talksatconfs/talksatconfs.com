@@ -8,6 +8,7 @@ use Illuminate\View\Component;
 
 class Details extends Component
 {
+
     public function __construct(public $speaker)
     {
     }
