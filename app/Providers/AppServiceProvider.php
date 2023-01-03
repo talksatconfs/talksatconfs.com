@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,5 +32,7 @@ class AppServiceProvider extends ServiceProvider
             'video' => 'Domain\TalksAtConfs\Models\Video',
             'user' => 'App\Models\User',
         ]);
+
+        Model::preventLazyLoading(! $this->app->isProduction());
     }
 }

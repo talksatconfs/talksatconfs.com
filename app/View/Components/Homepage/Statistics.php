@@ -13,23 +13,23 @@ use Illuminate\View\Component;
 
 class Statistics extends Component
 {
-    public $conference_count;
+    public $conferenceCount;
 
-    public $event_count;
+    public $eventCount;
 
-    public $speaker_count;
+    public $speakerCount;
 
-    public $talk_count;
+    public $talkCount;
 
-    public $video_count;
+    public $videoCount;
 
     public function __construct()
     {
-        $this->conference_count = number_format(Conference::count());
-        $this->event_count = number_format(Event::count());
-        $this->speaker_count = number_format(Speaker::count());
-        $this->talk_count = number_format(Talk::count());
-        $this->video_count = number_format(Video::count());
+        $this->conferenceCount = number_format(Conference::count());
+        $this->eventCount = number_format(Event::count());
+        $this->speakerCount = number_format(Speaker::count());
+        $this->talkCount = number_format(Talk::count());
+        $this->videoCount = number_format(Video::count());
     }
 
     /**

@@ -3,4 +3,4 @@
     <x-heading title="Events">
     </x-heading>
     <livewire:event-listing />
-</x-layouts.app>
+</x-layouts.page>

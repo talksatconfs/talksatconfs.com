@@ -4,4 +4,4 @@
     <x-homepage.latest-talks />
     <x-homepage.recently-added-talks />
     <x-homepage.statistics />
-</x-layouts.app>
+</x-layouts.page>

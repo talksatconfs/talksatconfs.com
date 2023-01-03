@@ -4,4 +4,4 @@
     </x-heading>
     {{-- <x-talk.listing :talks="$talks" /> --}}
     <livewire:talk-listing />
-</x-layouts.app>
+</x-layouts.page>

@@ -4,4 +4,4 @@
     </x-heading>
 
     <x-speaker.details :speaker="$speaker" />
-</x-layouts.app>
+</x-layouts.page>
