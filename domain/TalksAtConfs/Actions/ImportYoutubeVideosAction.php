@@ -10,16 +10,14 @@ class ImportYoutubeVideosAction
 {
     private function getYoutubeResponse($type, $id)
     {
-        return Cache::remember($type . '-' . $id, now()->addDay(), function () use ($id) {
-            return Youtube::getPlaylistItemsByPlaylistId($id);
-        });
+        return Cache::remember($type . '-' . $id, now()->addDay(), fn () => Youtube::getPlaylistItemsByPlaylistId($id));
     }
 
     private function processResponse($results): void
     {
         collect($results)
             ->each(function ($item) {
-                $item = json_decode(json_encode($item), true);
+                $item = json_decode(json_encode($item, JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR);
 
                 $videoKey = Arr::get($item, 'snippet.resourceId.videoId') ?? Arr::get($item, 'contentDetails.videoId');
 

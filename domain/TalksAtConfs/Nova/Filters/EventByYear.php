@@ -19,12 +19,10 @@ class EventByYear extends Filter
     /**
      * Apply the filter to the given query.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  mixed  $value
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function apply(Request $request, $query, $value)
+    public function apply(Request $request, $query, mixed $value)
     {
         return $query->where(DB::raw('YEAR(`from_date`)'), $value);
     }
@@ -32,7 +30,6 @@ class EventByYear extends Filter
     /**
      * Get the filter's available options.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function options(Request $request)
@@ -40,9 +37,7 @@ class EventByYear extends Filter
         return Event::select([DB::raw('DISTINCT(YEAR(`from_date`)) AS event_year')])
             ->orderBy(DB::raw('YEAR(`from_date`)'))
             ->get()
-            ->mapWithKeys(function ($row) {
-                return [$row->getAttribute('event_year') => $row->getAttribute('event_year')];
-            })
+            ->mapWithKeys(fn ($row) => [$row->getAttribute('event_year') => $row->getAttribute('event_year')])
             ->toArray();
     }
 }

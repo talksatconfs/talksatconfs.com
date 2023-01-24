@@ -19,7 +19,7 @@ class ImportSpeakers implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    public const SPEAKERS_FILE_NAME = 'speakers.yml';
+    final public const SPEAKERS_FILE_NAME = 'speakers.yml';
 
     public function __construct()
     {

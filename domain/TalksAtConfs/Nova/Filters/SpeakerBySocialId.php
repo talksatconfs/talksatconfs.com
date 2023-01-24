@@ -10,12 +10,10 @@ class SpeakerBySocialId extends BooleanFilter
     /**
      * Apply the filter to the given query.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  mixed  $value
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function apply(Request $request, $query, $value)
+    public function apply(Request $request, $query, mixed $value)
     {
         return $query
             ->when($value['twitter'], fn ($builder) => $builder->whereNull('twitter'))
@@ -27,7 +25,6 @@ class SpeakerBySocialId extends BooleanFilter
     /**
      * Get the filter's available options.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function options(Request $request)

@@ -11,7 +11,7 @@ import:
 config:
   application: 'talksatconfs.com'
   repository: 'git@github.com:talksatconfs/talksatconfs.com.git'
-  php_fpm_version: '8.1'
+  php_fpm_version: '8.2'
   remote_user: forge
   base_deploy_path: '/home/forge'
 

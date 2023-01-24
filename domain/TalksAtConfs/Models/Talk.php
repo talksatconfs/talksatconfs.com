@@ -88,11 +88,9 @@ class Talk extends TacModel
     {
         if (! is_null($this->speakers)) {
             return $this->speakers
-                ->map(function ($speaker) {
-                    return '<a href="' . $speaker->canonical_url . '" title="' . $speaker->name . '">
+                ->map(fn ($speaker) => '<a href="' . $speaker->canonical_url . '" title="' . $speaker->name . '">
                             ' . $speaker->name . '
-                        </a>';
-                })
+                        </a>')
                 ->join(', ', ' & ');
         }
     }

@@ -15,9 +15,7 @@ class ImportVideoDetailsAction
         return Cache::remember(
             'video-' . implode('-', $ids),
             now()->addDay(),
-            function () use ($ids) {
-                return Youtube::getVideoInfo($ids);
-            }
+            fn () => Youtube::getVideoInfo($ids)
         );
     }
 
@@ -25,7 +23,7 @@ class ImportVideoDetailsAction
     {
         collect($results)
             ->each(function ($item) {
-                $item = json_decode(json_encode($item), true);
+                $item = json_decode(json_encode($item, JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR);
 
                 $channel = (new AddChannel())->handle([
                     'source' => 'youtube',
@@ -51,7 +49,7 @@ class ImportVideoDetailsAction
     public function handle(array $ids): void
     {
         $response = $this->getYoutubeResponse($ids);
-        if (count($response) > 0) {
+        if ((is_countable($response) ? count($response) : 0) > 0) {
             $this->processResponse($response);
         }
     }

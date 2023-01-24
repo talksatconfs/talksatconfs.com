@@ -32,9 +32,7 @@ class AddTalk
         ]);
 
         $data = collect($data)
-            ->filter(function ($v) {
-                return ! empty($v);
-            })->toArray();
+            ->filter(fn ($v) => ! empty($v))->toArray();
 
         $talk->fill($data);
         $talk->save();

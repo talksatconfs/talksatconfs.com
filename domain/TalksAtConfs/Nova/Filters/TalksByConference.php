@@ -18,12 +18,10 @@ class TalksByConference extends Filter
     /**
      * Apply the filter to the given query.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  mixed  $value
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function apply(Request $request, $query, $value)
+    public function apply(Request $request, $query, mixed $value)
     {
         return $query->with('conference')->whereHas('conference', function ($q) use ($value) {
             $q->where('conferences.id', $value);
@@ -33,15 +31,12 @@ class TalksByConference extends Filter
     /**
      * Get the filter's available options.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function options(Request $request)
     {
-        return Conference::select(['id', 'name'])->get()->mapWithKeys(function ($conf) {
-            return [
-                $conf->name => $conf->id,
-            ];
-        })->toArray();
+        return Conference::select(['id', 'name'])->get()->mapWithKeys(fn ($conf) => [
+            $conf->name => $conf->id,
+        ])->toArray();
     }
 }

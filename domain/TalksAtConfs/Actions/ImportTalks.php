@@ -11,7 +11,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class ImportTalks
 {
-    private $videoHostMap = [
+    private array $videoHostMap = [
         'youtu.be' => 'youtube',
         'youtube.com' => 'youtube',
     ];
@@ -44,9 +44,7 @@ class ImportTalks
     {
         $talkAttrs = collect($talkData)
             ->only(['title', 'time', 'description'])
-            ->filter(function ($v) {
-                return ! empty($v);
-            })
+            ->filter(fn ($v) => ! empty($v))
             ->toArray();
 
         if ($talkAttrs['time'] ?? false) {
@@ -74,9 +72,7 @@ class ImportTalks
     {
         $speakerAction = new AddSpeaker();
         $speakers = collect($talkData['authors'])
-            ->map(function ($speaker) use ($speakerAction) {
-                return $speakerAction->handle($speaker)->id;
-            });
+            ->map(fn ($speaker) => $speakerAction->handle($speaker)->id);
         $talk->speakers()->sync($speakers);
     }
 

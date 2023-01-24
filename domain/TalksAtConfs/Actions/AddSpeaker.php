@@ -15,9 +15,7 @@ class AddSpeaker
         ]);
 
         $data = collect($data)
-            ->filter(function ($v) {
-                return ! empty($v);
-            })->toArray();
+            ->filter(fn ($v) => ! empty($v))->toArray();
 
         $speaker->fill($data);
         $speaker->save();

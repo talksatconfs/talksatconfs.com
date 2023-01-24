@@ -9,7 +9,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class ExportEventForConfpad
 {
-    public const CONF_DIR_NAME = './conferences/';
+    final public const CONF_DIR_NAME = './conferences/';
 
     public function __construct(protected $event_id)
     {
@@ -23,18 +23,16 @@ class ExportEventForConfpad
 
         $talkData = [];
 
-        $talkData = $event->talks->map(function ($talk) {
-            return [
-                'title' => $talk->title,
-                'lang' => 'en',
-                'type' => 'regular',
-                'time' => Str::replace(' 00:00:00', '', $talk->talk_date->format('Y-m-d H:i:s')),
-                'authors' => $this->getAuthors($talk),
-                'slides' => $this->getSlides($talk),
-                'videos' => $this->getVideos($talk),
-                'description' => $talk->description,
-            ];
-        })->toArray();
+        $talkData = $event->talks->map(fn ($talk) => [
+            'title' => $talk->title,
+            'lang' => 'en',
+            'type' => 'regular',
+            'time' => Str::replace(' 00:00:00', '', $talk->talk_date->format('Y-m-d H:i:s')),
+            'authors' => $this->getAuthors($talk),
+            'slides' => $this->getSlides($talk),
+            'videos' => $this->getVideos($talk),
+            'description' => $talk->description,
+        ])->toArray();
 
         $yamlData['conference'] = [
             'name' => $event->name,
@@ -76,14 +74,12 @@ class ExportEventForConfpad
         return $talk
             ->speakers()
             ->get()
-            ->mapWithKeys(function ($speaker) {
-                return [
-                    'name' => $speaker->name,
-                    'twitter' => $speaker->twitter,
-                    'github' => $speaker->github,
-                    'website' => $speaker->website,
-                ];
-            })
+            ->mapWithKeys(fn ($speaker) => [
+                'name' => $speaker->name,
+                'twitter' => $speaker->twitter,
+                'github' => $speaker->github,
+                'website' => $speaker->website,
+            ])
             ->toArray();
     }
 
@@ -92,9 +88,7 @@ class ExportEventForConfpad
         return $talk
             ->slides()
             ->get()
-            ->map(function ($slide) {
-                return $slide->link;
-            })
+            ->map(fn ($slide) => $slide->link)
             ->toArray();
     }
 
@@ -103,9 +97,7 @@ class ExportEventForConfpad
         return $talk
             ->videos()
             ->get()
-            ->map(function ($video) {
-                return $video->video_link;
-            })
+            ->map(fn ($video) => $video->video_link)
             ->toArray();
     }
 }

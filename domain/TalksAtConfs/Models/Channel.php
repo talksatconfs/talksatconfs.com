@@ -26,8 +26,6 @@ class Channel extends TacModel
      * Adds a scope to the Model to query for missing details
      *
      * @param Builder $query //
-     *
-     * @return void
      */
     public function scopeMissingDetails(Builder $query): void
     {
@@ -42,8 +40,6 @@ class Channel extends TacModel
     /**
      * Relation with the Video model
      * Can have many videos
-     *
-     * @return HasMany
      */
     public function videos(): HasMany
     {
