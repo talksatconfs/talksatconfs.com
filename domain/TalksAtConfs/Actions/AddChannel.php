@@ -21,9 +21,7 @@ class AddChannel
 
         $data = collect($data)
             ->filter(
-                function ($v) {
-                    return ! empty($v);
-                }
+                fn ($v) => ! empty($v)
             )->toArray();
 
         $channel->fill($data);

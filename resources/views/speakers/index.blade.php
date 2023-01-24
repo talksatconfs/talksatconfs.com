@@ -4,4 +4,4 @@
     </x-heading>
     {{-- <x-speaker.listing :speakers="$speakers" /> --}}
     <livewire:speaker-listing />
-</x-layouts.app>
+</x-layouts.page>

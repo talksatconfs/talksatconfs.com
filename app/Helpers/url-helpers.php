@@ -3,7 +3,7 @@
 use Spatie\Url\Url;
 
 if (! function_exists('twitter_url')) {
-    function twitter_url($handle): Url
+    function twitterUrl($handle): Url
     {
         $url = Url::fromString('https://twitter.com/');
 
@@ -11,13 +11,13 @@ if (! function_exists('twitter_url')) {
     }
 }
 if (! function_exists('website_url')) {
-    function website_url($website): Url
+    function websiteUrl($website): Url
     {
         return Url::fromString($website);
     }
 }
 if (! function_exists('website_host')) {
-    function website_host($website, $trimWww = false): string
+    function websiteHost($website, $trimWww = false): string
     {
         $url = Url::fromString($website);
 

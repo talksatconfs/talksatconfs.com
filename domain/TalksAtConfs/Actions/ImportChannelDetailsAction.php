@@ -13,9 +13,7 @@ class ImportChannelDetailsAction
         return Cache::remember(
             'channel-' . $id,
             now()->addWeek(),
-            function () use ($id) {
-                return Youtube::getChannelById($id);
-            }
+            fn () => Youtube::getChannelById($id)
         );
     }
 
@@ -37,7 +35,7 @@ class ImportChannelDetailsAction
     public function handle($id): void
     {
         $response = $this->getYoutubeResponse($id);
-        $response = json_decode(json_encode($response), true);
+        $response = json_decode(json_encode($response, JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR);
         if (! empty(Arr::get($response, 'snippet.title'))) {
             $this->processResponse($response);
         }

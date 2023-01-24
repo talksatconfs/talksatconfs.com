@@ -8,11 +8,8 @@ use Illuminate\View\Component;
 
 class Details extends Component
 {
-    // public $talks;
-
     public function __construct(public $speaker)
     {
-        // $this->talks = $talks;
     }
 
     /**

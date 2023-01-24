@@ -60,7 +60,7 @@ class Conference extends TacModel
 
     public function getTwitterUrlAttribute()
     {
-        return twitter_url($this->twitter);
+        return twitterUrl($this->twitter);
     }
 
     public function getChannelIdAttribute()

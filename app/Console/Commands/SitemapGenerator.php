@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 
 class SitemapGenerator extends Command
 {
-    protected $valid_entities = [
+    protected $entities = [
         'events',
         'conferences',
         'speakers',
@@ -30,16 +30,6 @@ class SitemapGenerator extends Command
     protected $description = 'Generates a sitemap';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
@@ -48,7 +38,7 @@ class SitemapGenerator extends Command
     {
         $entity = $this->argument('entity');
         if (
-            in_array($entity, $this->valid_entities)
+            in_array($entity, $this->entities)
             || is_null($entity)
         ) {
             (new \App\Sitemaps\SitemapGenerator())->generate($entity);

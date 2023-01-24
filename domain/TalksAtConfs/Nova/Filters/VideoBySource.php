@@ -18,12 +18,10 @@ class VideoBySource extends Filter
     /**
      * Apply the filter to the given query.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  mixed  $value
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function apply(Request $request, $query, $value)
+    public function apply(Request $request, $query, mixed $value)
     {
         return $query->where('source', $value);
     }
@@ -31,7 +29,6 @@ class VideoBySource extends Filter
     /**
      * Get the filter's available options.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function options(Request $request)
@@ -39,11 +36,9 @@ class VideoBySource extends Filter
         return Video::select(['source'])
             ->groupBy('source')
             ->get()
-            ->mapWithKeys(function ($video) {
-                return [
-                    $video->source => $video->source,
-                ];
-            })
+            ->mapWithKeys(fn ($video) => [
+                $video->source => $video->source,
+            ])
             ->toArray();
     }
 }

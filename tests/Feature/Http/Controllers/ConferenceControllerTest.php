@@ -43,21 +43,21 @@ class ConferenceControllerTest extends TestCase
     /** @test */
     public function it_checks_if_listing_page_display_expected_data_in_correct_format()
     {
-        $number_of_events = 1;
-        $number_of_talks = 3;
+        $numberOfEvents = 1;
+        $numberOfTalks = 3;
         $conference = Conference::factory()
             ->has(
                 Event::factory()
-                ->has(Talk::factory()->count($number_of_talks))
-                ->count($number_of_events)
+                ->has(Talk::factory()->count($numberOfTalks))
+                ->count($numberOfEvents)
             )
             ->create();
 
         $response = $this->get('/conferences');
 
         $response->assertSee($conference->title)
-            // ->assertSee('Number of events: '.$number_of_events)
-            // ->assertSee('Number of talks: '.$number_of_talks)
+            ->assertSee($numberOfEvents . ' events')
+            ->assertSee($numberOfTalks . ' talks')
             ->assertOk();
     }
 

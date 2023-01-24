@@ -73,13 +73,11 @@ class Video extends TacModel
     public function videoLink(): Attribute
     {
         return Attribute::make(
-            get: function ($value, $attributes) {
-                return match ($attributes['source']) {
-                    'youtube', 'www.youtube.com' => 'https://www.youtube.com/watch?v=' . $attributes['key'],
-                    'vimeo', 'vimeo.com' => 'https://vimeo.com/' . $attributes['key'],
-                    'halfstackconf.streameventlive.com' => 'https://halfstackconf.streameventlive.com' . $attributes['key'],
-                    default => $attributes['key']
-                };
+            get: fn ($value, $attributes) => match ($attributes['source']) {
+                'youtube', 'www.youtube.com' => 'https://www.youtube.com/watch?v=' . $attributes['key'],
+                'vimeo', 'vimeo.com' => 'https://vimeo.com/' . $attributes['key'],
+                'halfstackconf.streameventlive.com' => 'https://halfstackconf.streameventlive.com' . $attributes['key'],
+                default => $attributes['key']
             }
         );
     }

@@ -3,4 +3,4 @@
     <!-- <livewire:event-listing /> -->
     <livewire:talk-listing />
     <livewire:speaker-listing />
-</x-layouts.app>
+</x-layouts.page>

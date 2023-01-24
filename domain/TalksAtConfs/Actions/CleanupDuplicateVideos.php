@@ -10,8 +10,6 @@ class CleanupDuplicateVideos
      * Cleans up the duplicate videos
      *
      * @param string $key //
-     *
-     * @return Video
      */
     public function handle(string $key): Video
     {

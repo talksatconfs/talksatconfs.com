@@ -9,8 +9,8 @@
                 @if(! empty($conference->website))
                 <div class="mt-2 flex items-center text-sm text-gray-500">
                     <x-phosphor-browser-bold class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-700" />
-                    <a href="{{ website_url($conference->website) }}">
-                        {{ website_host($conference->website) }}
+                    <a href="{{ websiteUrl($conference->website) }}">
+                        {{ websiteHost($conference->website) }}
                     </a>
                 </div>
                 @endif

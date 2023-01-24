@@ -19,14 +19,14 @@ class ImportEvent
     private function getPlaylistFromUrl($url): string|null
     {
         if (! empty($url)) {
-            $urlData = parse_url($url);
+            $urlData = parse_url((string) $url);
             $host = Str::after(Arr::get($urlData, 'host'), 'www.');
             $id = null;
             if (in_array($host, ['youtube.com', 'youtu.be'])) {
-                parse_str(Arr::get($urlData, 'query'), $qParams);
+                parse_str((string) Arr::get($urlData, 'query'), $qParams);
                 $id = Arr::get($qParams, 'list');
             } elseif (in_array($host, ['vimeo.com'])) {
-                $id = collect(explode('/', Arr::get($urlData, 'path')))->last();
+                $id = collect(explode('/', (string) Arr::get($urlData, 'path')))->last();
             } else {
                 $id = $url;
             }

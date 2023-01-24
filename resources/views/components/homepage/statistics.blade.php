@@ -15,27 +15,27 @@
       <div class="grid grid-cols-2 md:grid-cols-4 bg-indigo-600 rounded-lg gap-6 md:gap-8 p-6 md:p-8">
         <!-- stat - start -->
         <div class="flex flex-col items-center">
-          <div class="text-white text-xl sm:text-2xl md:text-3xl font-bold">{{ $conference_count }}</div>
+          <div class="text-white text-xl sm:text-2xl md:text-3xl font-bold">{{ $conferenceCount }}</div>
           <div class="text-indigo-200 text-sm sm:text-base">Conferences</div>
         </div>
         <!-- stat - end -->
 
         <!-- stat - start -->
         <div class="flex flex-col items-center">
-          <div class="text-white text-xl sm:text-2xl md:text-3xl font-bold">{{ $event_count }}</div>
+          <div class="text-white text-xl sm:text-2xl md:text-3xl font-bold">{{ $eventCount }}</div>
           <div class="text-indigo-200 text-sm sm:text-base">Events</div>
         </div>
 
         <!-- stat - start -->
         <div class="flex flex-col items-center">
-          <div class="text-white text-xl sm:text-2xl md:text-3xl font-bold">{{ $speaker_count }}</div>
+          <div class="text-white text-xl sm:text-2xl md:text-3xl font-bold">{{ $speakerCount }}</div>
           <div class="text-indigo-200 text-sm sm:text-base">Speakers</div>
         </div>
         <!-- stat - end -->
 
         <!-- stat - start -->
         <div class="flex flex-col items-center">
-          <div class="text-white text-xl sm:text-2xl md:text-3xl font-bold">{{ $talk_count }}</div>
+          <div class="text-white text-xl sm:text-2xl md:text-3xl font-bold">{{ $talkCount }}</div>
           <div class="text-indigo-200 text-sm sm:text-base">Talks</div>
         </div>
         <!-- stat - end -->

@@ -16,9 +16,7 @@ class AddVideo
         ]);
 
         $data = collect($data)
-            ->filter(function ($v) {
-                return ! empty($v);
-            })->toArray();
+            ->filter(fn ($v) => ! empty($v))->toArray();
 
         $video->fill($data);
 
