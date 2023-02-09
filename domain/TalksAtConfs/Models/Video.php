@@ -51,7 +51,7 @@ class Video extends TacModel
         return $this->belongsTo(Channel::class);
     }
 
-    public function getVideoEmbedLinkAttribute() : string|null
+    public function getVideoEmbedLinkAttribute(): string|null
     {
         if (in_array($this->source, ['youtube', 'www.youtube.com'])) {
             return 'https://www.youtube.com/embed/' . $this->key;
@@ -63,6 +63,7 @@ class Video extends TacModel
 
             return 'https://player.vimeo.com/video/' . $this->key . '?color=0c88dd&title=0&byline=0&portrait=0&badge=0';
         }
+        return null;
     }
 
     public function getDurationForHumansAttribute(): string
@@ -87,10 +88,10 @@ class Video extends TacModel
         $query->where('updated_at', '<', now()->subDays($days))
             ->where(function ($query) {
                 $query->orWhereNull('title')
-                ->orWhereNull('description')
-                ->orWhereNull('duration')
-                ->orWhereNull('published_at')
-                ->orWhereNull('channel_id');
+                    ->orWhereNull('description')
+                    ->orWhereNull('duration')
+                    ->orWhereNull('published_at')
+                    ->orWhereNull('channel_id');
             });
     }
 
