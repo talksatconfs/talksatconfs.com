@@ -56,8 +56,8 @@ class ConferenceControllerTest extends TestCase
         $response = $this->get('/conferences');
 
         $response->assertSee($conference->title)
-            ->assertSee($numberOfEvents. ' events')
-            ->assertSee($numberOfTalks. ' talks')
+            ->assertSee($numberOfEvents . ' events')
+            ->assertSee($numberOfTalks . ' talks')
             ->assertOk();
     }
 

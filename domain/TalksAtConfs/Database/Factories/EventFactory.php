@@ -2,7 +2,6 @@
 
 namespace Domain\TalksAtConfs\Database\Factories;
 
-use App\Models\Model;
 use Domain\TalksAtConfs\Models\Conference;
 use Domain\TalksAtConfs\Models\Event;
 use Illuminate\Database\Eloquent\Factories\Factory;

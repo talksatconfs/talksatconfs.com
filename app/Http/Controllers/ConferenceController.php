@@ -1,15 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\View\View;
-use Domain\TalksAtConfs\Models\Talk;
-use Domain\TalksAtConfs\Models\Event;
-use Illuminate\Contracts\View\Factory;
+use App\Http\Requests\ConferenceEventSearch;
 use App\Http\Requests\ConferenceSearch;
 use Domain\TalksAtConfs\Models\Conference;
-use App\Http\Requests\ConferenceEventSearch;
+use Illuminate\Contracts\View\View;
 
 class ConferenceController extends Controller
 {

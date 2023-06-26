@@ -63,6 +63,7 @@ class Video extends TacModel
 
             return 'https://player.vimeo.com/video/' . $this->key . '?color=0c88dd&title=0&byline=0&portrait=0&badge=0';
         }
+
         return null;
     }
 
