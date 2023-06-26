@@ -19,5 +19,9 @@ export default {
         },
     },
 
-    plugins: [forms, typography],
+    plugins: [
+        require("@tailwindcss/aspect-ratio"),
+        require("@tailwindcss/line-clamp"),
+        forms, typography
+    ],
 };
