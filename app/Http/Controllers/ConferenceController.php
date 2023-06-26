@@ -1,16 +1,19 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ConferenceEventSearch;
+use Illuminate\Contracts\View\View;
+use Domain\TalksAtConfs\Models\Talk;
+use Domain\TalksAtConfs\Models\Event;
+use Illuminate\Contracts\View\Factory;
 use App\Http\Requests\ConferenceSearch;
 use Domain\TalksAtConfs\Models\Conference;
+use App\Http\Requests\ConferenceEventSearch;
 
 class ConferenceController extends Controller
 {
-    public function index(ConferenceSearch $request): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+    public function index(ConferenceSearch $request): View
     {
         return view('conferences.index', [
             'title' => 'List of Conferences',
@@ -19,7 +22,7 @@ class ConferenceController extends Controller
         ]);
     }
 
-    public function show(Conference $conference, ConferenceEventSearch $request): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+    public function show(Conference $conference, ConferenceEventSearch $request): View
     {
         return view('conferences.show', [
             'title' => $conference->name . ' - Conference',
