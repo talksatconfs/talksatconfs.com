@@ -7,10 +7,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ConferenceEventSearch;
 use App\Http\Requests\ConferenceSearch;
 use Domain\TalksAtConfs\Models\Conference;
+use Illuminate\Contracts\View\View;
 
 class ConferenceController extends Controller
 {
-    public function index(ConferenceSearch $request): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+    public function index(ConferenceSearch $request): View
     {
         return view('conferences.index', [
             'title' => 'List of Conferences',
@@ -19,7 +20,7 @@ class ConferenceController extends Controller
         ]);
     }
 
-    public function show(Conference $conference, ConferenceEventSearch $request): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+    public function show(Conference $conference, ConferenceEventSearch $request): View
     {
         return view('conferences.show', [
             'title' => $conference->name . ' - Conference',

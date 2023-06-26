@@ -11,6 +11,8 @@ class SpeakerController extends Controller
 {
     public function index(SpeakerSearch $request): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
+        Event::all();
+
         return view('speakers.index', [
             'title' => 'List of Speakers',
             'canonicalurl' => route('speakers.index'),
