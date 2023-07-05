@@ -28,6 +28,8 @@ class TalkResource extends Resource
                 Forms\Components\TextInput::make('title')->required(),
                 Forms\Components\MarkdownEditor::make('description'),
                 Forms\Components\TextInput::make('link'),
+                Forms\Components\TextInput::make('talk_date'),
+                Forms\Components\TextInput::make('video_start_time'),
             ]);
     }
 
@@ -36,6 +38,8 @@ class TalkResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')->sortable(),
+                Tables\Columns\TextColumn::make('link'),
+                Tables\Columns\TextColumn::make('talk_date')->date()->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

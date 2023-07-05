@@ -2,16 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\EventResource\Pages;
-use App\Filament\Resources\EventResource\RelationManagers;
-use Domain\TalksAtConfs\Models\Event;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Illuminate\Support\Facades\DB;
+use Domain\TalksAtConfs\Models\Event;
 use Illuminate\Database\Eloquent\Builder;
+use Domain\TalksAtConfs\Models\Conference;
+use App\Filament\Resources\EventResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\EventResource\RelationManagers;
 
 class EventResource extends Resource
 {
@@ -43,6 +45,40 @@ class EventResource extends Resource
                 Tables\Columns\TextColumn::make('to_date')->date(),
             ])
             ->filters([
+                Tables\Filters\SelectFilter::make('conference_id')
+                    ->relationship('conference', 'name'),
+
+                Tables\Filters\SelectFilter::make('event_year')
+                    ->form([
+                        Forms\Components\Select::make('event_year')
+                            ->options(
+                                Event::select([DB::raw('DISTINCT(YEAR(`from_date`)) AS event_year')])
+                                    ->whereNotNull(DB::raw('YEAR(`from_date`)'))
+                                    ->orderBy(DB::raw('YEAR(`from_date`)'))
+                                    ->get()
+                                    ->mapWithKeys(fn ($row) => [$row->getAttribute('event_year') => $row->getAttribute('event_year')])
+                                    ->toArray()
+                            ),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['event_year'],
+                                fn (Builder $query, $date): Builder => $query->where(DB::raw('YEAR(`from_date`)'), $data['event_year']),
+                            );
+                    }),
+
+                Tables\Filters\TernaryFilter::make('city')
+                    ->nullable()
+                    ->attribute('city'),
+                Tables\Filters\TernaryFilter::make('country')
+                    ->nullable()
+                    ->attribute('country'),
+                Tables\Filters\TernaryFilter::make('venue')
+                    ->nullable()
+                    ->attribute('venue'),
+
+
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([

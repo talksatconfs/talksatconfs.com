@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Forms;
 use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
@@ -24,7 +25,12 @@ class SpeakerResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')->required(),
+                Forms\Components\TextInput::make('bio'),
+                Forms\Components\TextInput::make('website'),
+                Forms\Components\TextInput::make('twitter'),
+                Forms\Components\TextInput::make('github'),
+                Forms\Components\TextInput::make('youtube'),
             ]);
     }
 
