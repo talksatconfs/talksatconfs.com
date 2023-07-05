@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\EventResource\Pages;
+use App\Filament\Resources\EventResource\RelationManagers;
 use Domain\TalksAtConfs\Models\Event;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -32,7 +33,14 @@ class EventResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->sortable(),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('conference.name'),
+                Tables\Columns\TextColumn::make('location'),
+                Tables\Columns\TextColumn::make('venue'),
+                Tables\Columns\TextColumn::make('city'),
+                Tables\Columns\TextColumn::make('country'),
+                Tables\Columns\TextColumn::make('from_date')->date(),
+                Tables\Columns\TextColumn::make('to_date')->date(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -50,7 +58,7 @@ class EventResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\TalksRelationManager::class,
         ];
     }
 

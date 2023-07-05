@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ConferenceResource\Pages;
-use Domain\TalksAtConfs\Models\Conference;
 use Filament\Forms;
-use Filament\Forms\Components\SpatieTagsInput;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
+use Domain\TalksAtConfs\Models\Conference;
+use Filament\Forms\Components\SpatieTagsInput;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\ConferenceResource\Pages;
+use App\Filament\Resources\ConferenceResource\RelationManagers;
 
 class ConferenceResource extends Resource
 {
@@ -62,7 +63,7 @@ class ConferenceResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\EventsRelationManager::class,
         ];
     }
 

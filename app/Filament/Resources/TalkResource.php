@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TalkResource\Pages;
+use App\Filament\Resources\TalkResource\RelationManagers;
 use Domain\TalksAtConfs\Models\Talk;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -52,7 +53,7 @@ class TalkResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\SpeakersRelationManager::class,
         ];
     }
 
