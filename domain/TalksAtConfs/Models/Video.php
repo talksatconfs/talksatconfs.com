@@ -54,14 +54,14 @@ class Video extends TacModel
     public function getVideoEmbedLinkAttribute(): string|null
     {
         if (in_array($this->source, ['youtube', 'www.youtube.com'])) {
-            return 'https://www.youtube.com/embed/' . $this->key;
+            return 'https://www.youtube.com/embed/'.$this->key;
         }
         if (in_array($this->source, ['vimeo', 'vimeo.com'])) {
             if (Str::contains($this->key, 'showcase')) {
-                return 'https://player.vimeo.com/video/' . Str::after($this->key, 'video/') . '?color=0c88dd&title=0&byline=0&portrait=0&badge=0';
+                return 'https://player.vimeo.com/video/'.Str::after($this->key, 'video/').'?color=0c88dd&title=0&byline=0&portrait=0&badge=0';
             }
 
-            return 'https://player.vimeo.com/video/' . $this->key . '?color=0c88dd&title=0&byline=0&portrait=0&badge=0';
+            return 'https://player.vimeo.com/video/'.$this->key.'?color=0c88dd&title=0&byline=0&portrait=0&badge=0';
         }
 
         return null;
@@ -76,9 +76,9 @@ class Video extends TacModel
     {
         return Attribute::make(
             get: fn ($value, $attributes) => match ($attributes['source']) {
-                'youtube', 'www.youtube.com' => 'https://www.youtube.com/watch?v=' . $attributes['key'],
-                'vimeo', 'vimeo.com' => 'https://vimeo.com/' . $attributes['key'],
-                'halfstackconf.streameventlive.com' => 'https://halfstackconf.streameventlive.com' . $attributes['key'],
+                'youtube', 'www.youtube.com' => 'https://www.youtube.com/watch?v='.$attributes['key'],
+                'vimeo', 'vimeo.com' => 'https://vimeo.com/'.$attributes['key'],
+                'halfstackconf.streameventlive.com' => 'https://halfstackconf.streameventlive.com'.$attributes['key'],
                 default => $attributes['key']
             }
         );

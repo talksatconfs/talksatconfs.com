@@ -11,7 +11,7 @@ class ImportChannelDetailsAction
     private function getYoutubeResponse($id)
     {
         return Cache::remember(
-            'channel-' . $id,
+            'channel-'.$id,
             now()->addWeek(),
             fn () => Youtube::getChannelById($id)
         );

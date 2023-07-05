@@ -7,12 +7,13 @@ namespace Domain\TalksAtConfs\Models;
 use Domain\TalksAtConfs\Contracts\UuidForModel;
 use Domain\TalksAtConfs\Database\Factories\EventFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Laravel\Nova\Actions\Actionable;
 use Laravel\Scout\Searchable;
 use Spatie\Url\Url;
 
@@ -35,11 +36,11 @@ use Spatie\Url\Url;
  */
 class Event extends TacModel
 {
-    // use Actionable;
     use HasFactory;
     use Notifiable;
     use Searchable;
     use UuidForModel;
+    use SoftDeletes;
 
     protected $guarded = [];
 
@@ -61,14 +62,22 @@ class Event extends TacModel
     }
 
     // Accessors
-    public function getEventTitleAttribute(): string
+    protected function eventTitle(): Attribute
     {
-        return $this->name . ', ' . $this->location . '(' . $this->from_date?->format('M Y') . ')';
+        return Attribute::make(
+            get: function (string|null $value, array $attributes) {
+                return $attributes['name'].', '.$attributes['location'].'('.$attributes['from_date']?->format('M Y').')';
+            }
+        );
     }
 
-    public function getCanonicalUrlAttribute(): string
+    protected function canonicalUrl(): Attribute
     {
-        return route('events.show', ['event' => $this->slug]);
+        return Attribute::make(
+            get: function (string|null $value, array $attribute) {
+                return route('events.show', ['event' => $attribute['slug']]);
+            }
+        );
     }
 
     public function getPlaylistIdAttribute()
@@ -87,11 +96,11 @@ class Event extends TacModel
         }
 
         if (in_array($playlistData[0], ['youtube', 'youtube.com', 'www.youtube.com'])) {
-            return 'https://www.youtube.com/playlist?list=' . $playlistData[1];
+            return 'https://www.youtube.com/playlist?list='.$playlistData[1];
         }
 
         if (in_array($playlistData[0], ['vimeo', 'vimeo.com'])) {
-            return 'https://vimeo.com/album/' . $playlistData[1];
+            return 'https://vimeo.com/album/'.$playlistData[1];
         }
 
         if (count($playlistData) === 2) {
@@ -111,7 +120,7 @@ class Event extends TacModel
         if (empty($this->city) && empty($this->country)) {
             $location = $this->location;
         } else {
-            $location = $this->city . ', ' . $this->country;
+            $location = $this->city.', '.$this->country;
         }
 
         return $location;
@@ -130,7 +139,7 @@ class Event extends TacModel
 
     public function getFromToDateAttribute(): string
     {
-        return $this->from_date->format('M d, Y') . ' to ' . $this->to_date->format('M d, Y');
+        return $this->from_date->format('M d, Y').' to '.$this->to_date->format('M d, Y');
     }
 
     // Relationships

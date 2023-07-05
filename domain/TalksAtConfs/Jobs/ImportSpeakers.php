@@ -48,8 +48,8 @@ class ImportSpeakers implements ShouldQueue
                         ->get(self::SPEAKERS_FILE_NAME)
                 )
         )
-        ->each(function ($speaker) {
-            $this->addSpeakerWithData($speaker);
-        });
+            ->each(function ($speaker) {
+                $this->addSpeakerWithData($speaker);
+            });
     }
 }

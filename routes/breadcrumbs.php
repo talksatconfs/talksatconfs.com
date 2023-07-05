@@ -47,7 +47,7 @@ Breadcrumbs::for('speakers', function (BreadcrumbTrail $trail) {
 
 Breadcrumbs::for('speaker', function (BreadcrumbTrail $trail, $speaker) {
     $trail->parent('speakers');
-    $trail->push($speaker->name, route('speakers.show', ['speaker'=>$speaker->slug]));
+    $trail->push($speaker->name, route('speakers.show', ['speaker' => $speaker->slug]));
 });
 
 Breadcrumbs::for('talks', function (BreadcrumbTrail $trail) {

@@ -27,6 +27,6 @@ if (! function_exists('website_host')) {
             return $trimWww ? Str::after($host, 'www.') : $host;
         }
 
-        return $url->getHost() . $url->getPath();
+        return $url->getHost().$url->getPath();
     }
 }

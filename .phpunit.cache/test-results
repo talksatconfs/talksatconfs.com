@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Tests\\Feature\\Http\\Controllers\\ConferenceTest::it_checks_all_conference_attributes_are_clean":5},"times":{"Tests\\Feature\\Http\\Controllers\\ConferenceTest::it_checks_all_conference_attributes_are_clean":0.052}}

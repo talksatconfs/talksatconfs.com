@@ -13,7 +13,7 @@ class ImportVideoDetailsAction
     private function getYoutubeResponse(array $ids)
     {
         return Cache::remember(
-            'video-' . implode('-', $ids),
+            'video-'.implode('-', $ids),
             now()->addDay(),
             fn () => Youtube::getVideoInfo($ids)
         );

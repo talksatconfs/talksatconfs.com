@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 
@@ -29,6 +30,7 @@ class Talk extends TacModel
     use HasFactory;
     use Searchable;
     use UuidForModel;
+    use SoftDeletes;
 
     protected $guarded = [];
 
@@ -88,8 +90,8 @@ class Talk extends TacModel
     {
         if (! is_null($this->speakers)) {
             return $this->speakers
-                ->map(fn ($speaker) => '<a href="' . $speaker->canonical_url . '" title="' . $speaker->name . '">
-                            ' . $speaker->name . '
+                ->map(fn ($speaker) => '<a href="'.$speaker->canonical_url.'" title="'.$speaker->name.'">
+                            '.$speaker->name.'
                         </a>')
                 ->join(', ', ' & ');
         }
@@ -112,10 +114,10 @@ class Talk extends TacModel
             'description', 'link', 'talk_date',
             'video_start_time', 'event_id',
         ])
-        ->with([
-            'videos', 'speakers', 'event',
-        ])
-        ->withCount('videos');
+            ->with([
+                'videos', 'speakers', 'event',
+            ])
+            ->withCount('videos');
     }
 
     public function scopeSortByTalkDate(Builder $query): void

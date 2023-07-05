@@ -10,7 +10,7 @@ class ImportYoutubeVideosAction
 {
     private function getYoutubeResponse($type, $id)
     {
-        return Cache::remember($type . '-' . $id, now()->addDay(), fn () => Youtube::getPlaylistItemsByPlaylistId($id));
+        return Cache::remember($type.'-'.$id, now()->addDay(), fn () => Youtube::getPlaylistItemsByPlaylistId($id));
     }
 
     private function processResponse($results): void

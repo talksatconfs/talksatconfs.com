@@ -56,7 +56,7 @@ class ExportEventForConfpad
             'talks' => $talkData,
         ];
 
-        $filePath = './' . self::CONF_DIR_NAME . '/' . $event->from_date->format('Y') . '/' . $event->from_date->format('Y-m-d') . '-' . $event->slug . '.yaml';
+        $filePath = './'.self::CONF_DIR_NAME.'/'.$event->from_date->format('Y').'/'.$event->from_date->format('Y-m-d').'-'.$event->slug.'.yaml';
 
         Storage::disk('confpad-data')
             ->put(

@@ -24,7 +24,7 @@ class ImportTalks
     {
         $confData = (new Yaml())->parse(
             Storage::disk('confpad-data')
-                ->get('/conferences/' . $this->year . '/' . $this->filename)
+                ->get('/conferences/'.$this->year.'/'.$this->filename)
         );
 
         collect($confData['talks'])->each(function ($talkData) {

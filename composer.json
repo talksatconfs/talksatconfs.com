@@ -10,6 +10,8 @@
         "codeat3/blade-phosphor-icons": "^1.4",
         "diglactic/laravel-breadcrumbs": "^8.0",
         "enlightn/enlightn": "^2.1",
+        "filament/filament": "^2.0",
+        "filament/spatie-laravel-tags-plugin": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "http-interop/http-factory-guzzle": "^1.2",
         "laravel/framework": "^10.0",
@@ -65,7 +67,8 @@
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "@php artisan livewire:publish --assets"
+            "@php artisan livewire:publish --assets",
+            "@php artisan filament:upgrade"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

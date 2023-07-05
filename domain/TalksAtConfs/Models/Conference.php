@@ -5,9 +5,11 @@ namespace Domain\TalksAtConfs\Models;
 use Domain\TalksAtConfs\Contracts\UuidForModel;
 use Domain\TalksAtConfs\Database\Factories\ConferenceFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -32,10 +34,11 @@ class Conference extends TacModel
     use Notifiable;
     use Searchable;
     use UuidForModel;
+    use SoftDeletes;
 
     protected $guarded = [];
 
-    public function getTagClassName(): string
+    public static function getTagClassName(): string
     {
         return Tag::class;
     }
@@ -53,46 +56,70 @@ class Conference extends TacModel
     }
 
     // Accessors
-    public function getCanonicalUrlAttribute(): string
+    protected function canonicalUrl(): Attribute
     {
-        return route('conferences.show', ['conference' => $this->slug]);
+        return Attribute::make(
+            get: function (string|null $value, array $attributes) {
+                return route('conferences.show', ['conference' => $attributes['slug']]);
+            },
+        );
     }
 
-    public function getTwitterUrlAttribute()
+    protected function twitterUrl(): Attribute
     {
-        return twitterUrl($this->twitter);
+        return Attribute::make(
+            get: function (string|null $value, array $attributes) {
+                return twitterUrl($attributes['twitter']);
+            },
+        );
     }
 
-    public function getChannelIdAttribute()
+    protected function channelId(): Attribute
     {
-        $channelData = explode(':', $this->channel);
+        return Attribute::make(
+            get: function (string|null $value, array $attributes) {
+                $channelData = explode(':', $attributes['channel']);
 
-        return Arr::get($channelData, 1);
+                return Arr::get($channelData, 1);
+            },
+        );
     }
 
-    public function getChannelSourceAttribute()
+    protected function channelSource(): Attribute
     {
-        return Arr::get(explode(':', $this->channel), '0');
+        return Attribute::make(
+            get: function (string|null $value, array $attributes) {
+                return Arr::get(explode(':', $attributes['channel']), 0);
+            },
+        );
     }
 
-    public function getChannelKeyAttribute()
+    protected function channelKey(): Attribute
     {
-        return Arr::get(explode(':', $this->channel), '1');
+        return Attribute::make(
+            get: function (string|null $value, array $attributes) {
+                return Arr::get(explode(':', $attributes['channel']), '1');
+            },
+        );
     }
 
-    public function getChannelUrlAttribute()
+    protected function channelUrl(): Attribute
     {
-        if (in_array($this->channelSource, ['youtube', 'vimeo'])) {
-            return $this->channelSource === 'youtube'
-                ? 'https://www.youtube.com/channel/' . $this->channelKey
-                : 'https://vimeo.com/channels/' . $this->channelKey;
-        }
+        return Attribute::make(
+            get: function (string|null $value, array $attributes) {
+                if (in_array($attributes['channel_source'], ['youtube', 'vimeo'])) {
+                    return $attributes['channel_source'] === 'youtube'
+                        ? 'https://www.youtube.com/channel/'.$attributes['channel_key']
+                        : 'https://vimeo.com/channels/'.$attributes['channel_key'];
+                }
 
-        if (Str::startsWith($this->channel, 'UC')) {
-            return 'https://www.youtube.com/channel/' . $this->channel;
-        }
+                if (Str::startsWith($attributes['channel'], 'UC')) {
+                    return 'https://www.youtube.com/channel/'.$attributes['channel'];
+                }
 
-        return $this->channel;
+                return $attributes['channel'];
+            },
+        );
     }
 
     // Route

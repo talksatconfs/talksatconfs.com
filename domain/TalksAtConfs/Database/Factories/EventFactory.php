@@ -25,7 +25,7 @@ class EventFactory extends Factory
         return [
             'conference_id' => Conference::factory(),
             'name' => $this->faker->name,
-            'location' => $this->faker->city . ', ' . $this->faker->country,
+            'location' => $this->faker->city.', '.$this->faker->country,
             'from_date' => '2021-08-28',
             'to_date' => '2021-09-10',
         ];

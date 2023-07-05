@@ -23,7 +23,7 @@ class TalkSitemap implements SitemapContract
     {
         $this->sitemap = Sitemap::create();
 
-        $this->path = public_path(config('talksatconfs.sitemap_path') . '/' . self::SITEMAP_NAME);
+        $this->path = public_path(config('talksatconfs.sitemap_path').'/'.self::SITEMAP_NAME);
     }
 
     public function generate()

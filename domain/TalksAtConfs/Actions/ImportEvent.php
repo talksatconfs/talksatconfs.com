@@ -31,7 +31,7 @@ class ImportEvent
                 $id = $url;
             }
 
-            return $host . ':' . $id;
+            return $host.':'.$id;
         }
     }
 
@@ -39,7 +39,7 @@ class ImportEvent
     {
         $confData = (new Yaml())->parse(
             Storage::disk('confpad-data')
-            ->get('/conferences/' . $this->year . '/' . $this->filename)
+                ->get('/conferences/'.$this->year.'/'.$this->filename)
         );
 
         $event = Event::firstOrNew([

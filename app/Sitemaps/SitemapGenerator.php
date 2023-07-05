@@ -47,7 +47,7 @@ class SitemapGenerator
 
         collect($sitemaps)->each(function ($sitemap) {
             $this->sitemapIndex->add(
-                config('talksatconfs.domain') . '/' . config('talksatconfs.sitemap_path') . '/' . basename($sitemap)
+                config('talksatconfs.domain').'/'.config('talksatconfs.sitemap_path').'/'.basename($sitemap)
             );
         });
 

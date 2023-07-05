@@ -7,6 +7,7 @@ use Domain\TalksAtConfs\Database\Factories\SpeakerFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 
@@ -28,6 +29,7 @@ class Speaker extends TacModel
     use HasFactory;
     use Searchable;
     use UuidForModel;
+    use SoftDeletes;
 
     protected $guarded = [];
 
@@ -51,17 +53,17 @@ class Speaker extends TacModel
 
     public function getGithubLinkAttribute(): string
     {
-        return 'https://github.com/' . $this->github;
+        return 'https://github.com/'.$this->github;
     }
 
     public function getTwitterLinkAttribute(): string
     {
-        return 'https://twitter.com/' . $this->twitter;
+        return 'https://twitter.com/'.$this->twitter;
     }
 
     public function getYoutubeLinkAttribute(): string
     {
-        return 'https://youtube.com/' . $this->youtube;
+        return 'https://youtube.com/'.$this->youtube;
     }
 
     public function getCanonicalUrlAttribute(): string
