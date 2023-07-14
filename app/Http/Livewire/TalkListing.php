@@ -12,6 +12,8 @@ class TalkListing extends Component
 {
     public $query;
 
+    public $talksWithVideos = false;
+
     public $event;
 
     public $speaker;
@@ -22,14 +24,14 @@ class TalkListing extends Component
     {
         if ($this->query) {
             $talks = Talk::search($this->query)->query(function (Builder $builder) {
-                $builder->details()
+                $builder->details($this->talksWithVideos)
                     ->sortByTalkDate();
             })
             ->when($this->event, fn ($builder) => $builder->where('event_id', $this->event->id))
             ->when($this->speaker, fn ($builder) => $builder->where('speaker_ids', $this->speaker->id))
             ->orderBy('talk_date', 'desc');
         } else {
-            $talks = Talk::details()
+            $talks = Talk::details($this->talksWithVideos)
                 ->sortByTalkDate()
                 ->when($this->event, fn ($builder) => $builder->where('event_id', $this->event->id))
                 ->when($this->speaker, function ($builder) {

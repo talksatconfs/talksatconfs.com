@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use Domain\TalksAtConfs\Models\Talk;
+use Illuminate\Database\Eloquent\Builder;
+use Livewire\Component;
+
+class LatestTalks extends Component
+{
+
+    public $talksWithVideos = false;
+
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|\Closure|string
+     */
+    public function render()
+    {
+        return view('livewire.latest-talks', [
+            'talks' => Talk::details($this->talksWithVideos)
+                ->sortByTalkDate()
+                ->limit(6)
+                ->get()
+        ]);
+    }
+}

@@ -74,7 +74,7 @@ class Talk extends TacModel
 
     public function getSpeakersNamesAttribute()
     {
-        if (! is_null($this->speakers)) {
+        if (!is_null($this->speakers)) {
             return $this->speakers->pluck('name')->join(', ', ' & ');
         }
     }
@@ -86,7 +86,7 @@ class Talk extends TacModel
 
     public function getSpeakersLinksAttribute()
     {
-        if (! is_null($this->speakers)) {
+        if (!is_null($this->speakers)) {
             return $this->speakers
                 ->map(fn ($speaker) => '<a href="' . $speaker->canonical_url . '" title="' . $speaker->name . '">
                             ' . $speaker->name . '
@@ -105,17 +105,19 @@ class Talk extends TacModel
         return $this->hasMany(Slide::class);
     }
 
-    public function scopeDetails(Builder $query): void
+    public function scopeDetails(Builder $query, $withVideos = false): void
     {
         $query->select([
             'id', 'title', 'slug',
             'description', 'link', 'talk_date',
             'video_start_time', 'event_id',
         ])
-        ->with([
-            'videos', 'speakers', 'event',
-        ])
-        ->withCount('videos');
+            ->with([
+                'videos', 'speakers', 'event',
+            ]);
+        if ($withVideos) {
+            $query->has('videos', '>', 0);
+        }
     }
 
     public function scopeSortByTalkDate(Builder $query): void
