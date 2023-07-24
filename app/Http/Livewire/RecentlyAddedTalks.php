@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
 use Domain\TalksAtConfs\Models\Talk;
+use Livewire\Component;
 
 class RecentlyAddedTalks extends Component
 {
@@ -20,7 +20,7 @@ class RecentlyAddedTalks extends Component
             'talks' => Talk::details()
                 ->sortByCreatedDate()
                 ->limit(6)
-                ->get()
+                ->get(),
         ]);
     }
 }

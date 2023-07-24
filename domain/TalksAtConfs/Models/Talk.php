@@ -74,7 +74,7 @@ class Talk extends TacModel
 
     public function getSpeakersNamesAttribute()
     {
-        if (!is_null($this->speakers)) {
+        if (! is_null($this->speakers)) {
             return $this->speakers->pluck('name')->join(', ', ' & ');
         }
     }
@@ -86,7 +86,7 @@ class Talk extends TacModel
 
     public function getSpeakersLinksAttribute()
     {
-        if (!is_null($this->speakers)) {
+        if (! is_null($this->speakers)) {
             return $this->speakers
                 ->map(fn ($speaker) => '<a href="' . $speaker->canonical_url . '" title="' . $speaker->name . '">
                             ' . $speaker->name . '

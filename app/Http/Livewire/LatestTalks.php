@@ -3,12 +3,10 @@
 namespace App\Http\Livewire;
 
 use Domain\TalksAtConfs\Models\Talk;
-use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 
 class LatestTalks extends Component
 {
-
     public $talksWithVideos = false;
 
     /**
@@ -22,7 +20,7 @@ class LatestTalks extends Component
             'talks' => Talk::details($this->talksWithVideos)
                 ->sortByTalkDate()
                 ->limit(6)
-                ->get()
+                ->get(),
         ]);
     }
 }
