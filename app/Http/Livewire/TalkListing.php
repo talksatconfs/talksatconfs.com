@@ -12,26 +12,26 @@ class TalkListing extends Component
 {
     public $query;
 
-    public $talksWithVideos = false;
+    public $withVideo = false;
 
     public $event;
 
     public $speaker;
 
-    protected $queryString = ['query'];
+    protected $queryString = ['query', 'withVideo'];
 
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         if ($this->query) {
             $talks = Talk::search($this->query)->query(function (Builder $builder) {
-                $builder->details($this->talksWithVideos)
+                $builder->details($this->withVideo)
                     ->sortByTalkDate();
             })
             ->when($this->event, fn ($builder) => $builder->where('event_id', $this->event->id))
             ->when($this->speaker, fn ($builder) => $builder->where('speaker_ids', $this->speaker->id))
             ->orderBy('talk_date', 'desc');
         } else {
-            $talks = Talk::details($this->talksWithVideos)
+            $talks = Talk::details($this->withVideo)
                 ->sortByTalkDate()
                 ->when($this->event, fn ($builder) => $builder->where('event_id', $this->event->id))
                 ->when($this->speaker, function ($builder) {
