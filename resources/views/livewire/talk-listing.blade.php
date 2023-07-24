@@ -11,9 +11,31 @@
                     </div>
                 </div>
             </form>
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold flex min-w-0 items-center">
 
+                </h3>
+                <div>
+                    <fieldset>
+                        <div class="mt-2 space-y-6">
+                            <div class="relative flex gap-x-3">
+                                <div class="flex h-6 items-center">
+                                    <input id="talks-with-videos" wire:model="talksWithVideos" type="checkbox"
+                                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                </div>
+                                <div class="text-sm leading-6">
+                                    <label for="talks-with-videos" class="font-medium text-gray-900 pl-3">Talks with videos
+                                        only</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
         </div>
+
     </div>
+
 
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
 
