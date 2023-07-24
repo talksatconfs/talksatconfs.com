@@ -51,11 +51,7 @@ class Video extends TacModel
         return $this->belongsTo(Channel::class);
     }
 
-<<<<<<< HEAD
     public function getVideoEmbedLinkAttribute(): string|null
-=======
-    public function getVideoEmbedLinkAttribute() : string|null
->>>>>>> 133042f (insights + enlightn fixes)
     {
         if (in_array($this->source, ['youtube', 'www.youtube.com'])) {
             return 'https://www.youtube.com/embed/' . $this->key;

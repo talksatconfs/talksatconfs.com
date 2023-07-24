@@ -38,13 +38,7 @@ class ImportTalk
         $speakerAction = new AddSpeaker();
 
         return collect($this->getSpeakerNames(Arr::get($this->data, 'speakers')))
-<<<<<<< HEAD
             ->map(fn ($speaker) => $speakerAction->handle(['name' => $speaker])->id);
-=======
-            ->map(function ($speaker) use ($speakerAction) {
-                return $speakerAction->handle(['name' => $speaker])->id;
-            });
->>>>>>> 133042f (insights + enlightn fixes)
     }
 
     private function syncVideos($talk)
