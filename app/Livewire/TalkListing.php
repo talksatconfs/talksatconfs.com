@@ -2,14 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use Domain\TalksAtConfs\Models\Talk;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class TalkListing extends Component
 {
+    use WithPagination;
+
     public $query;
 
     public $withVideo = false;
@@ -18,7 +21,10 @@ class TalkListing extends Component
 
     public $speaker;
 
-    protected $queryString = ['query', 'withVideo'];
+    protected $queryString = [
+        'query' => ['keep' => true],
+        'withVideo' => ['keep' => true],
+    ];
 
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
@@ -27,9 +33,9 @@ class TalkListing extends Component
                 $builder->details($this->withVideo)
                     ->sortByTalkDate();
             })
-            ->when($this->event, fn ($builder) => $builder->where('event_id', $this->event->id))
-            ->when($this->speaker, fn ($builder) => $builder->where('speaker_ids', $this->speaker->id))
-            ->orderBy('talk_date', 'desc');
+                ->when($this->event, fn ($builder) => $builder->where('event_id', $this->event->id))
+                ->when($this->speaker, fn ($builder) => $builder->where('speaker_ids', $this->speaker->id))
+                ->orderBy('talk_date', 'desc');
         } else {
             $talks = Talk::details($this->withVideo)
                 ->sortByTalkDate()

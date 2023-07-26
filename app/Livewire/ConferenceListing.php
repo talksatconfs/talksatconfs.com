@@ -2,19 +2,24 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
-use Domain\TalksAtConfs\Models\Conference;
-use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
+use Livewire\WithPagination;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Builder;
+use Domain\TalksAtConfs\Models\Conference;
 
 class ConferenceListing extends Component
 {
+    use WithPagination;
+
     public $query;
 
     protected $queryString = ['query'];
 
-    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+    public function render(): View|Factory
     {
         if ($this->query) {
             $conferences = Conference::search($this->query)->query(function (Builder $builder) {

@@ -17,3 +17,6 @@ The following tools are required in order to start the installation.
 4. Generate a new app key `php atisan key:generate`
 5. Run the database migrations with seed option `php artisan migration --seed`
 6.
+
+## Setting up Meilisearch
+1.

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use Domain\TalksAtConfs\Models\Talk;
 use Livewire\Component;
@@ -9,7 +9,9 @@ class RecentlyAddedTalks extends Component
 {
     public $recentWithVideo = false;
 
-    protected $queryString = ['recentWithVideo'];
+    protected $queryString = [
+        'recentWithVideo' => ['keep' => true],
+    ];
 
     /**
      * Get the view / contents that represent the component.
