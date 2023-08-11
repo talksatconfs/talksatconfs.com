@@ -19,4 +19,4 @@ The following tools are required in order to start the installation.
 6.
 
 ## Setting up Meilisearch
-1.
+1. 

@@ -30,7 +30,7 @@ class ConferenceControllerTest extends TestCase
         $conference = Conference::factory()
             ->has(
                 Event::factory()
-                ->has(Talk::factory())
+                    ->has(Talk::factory())
             )
             ->create();
 
@@ -48,8 +48,8 @@ class ConferenceControllerTest extends TestCase
         $conference = Conference::factory()
             ->has(
                 Event::factory()
-                ->has(Talk::factory()->count($numberOfTalks))
-                ->count($numberOfEvents)
+                    ->has(Talk::factory()->count($numberOfTalks))
+                    ->count($numberOfEvents)
             )
             ->create();
 
@@ -109,15 +109,15 @@ class ConferenceControllerTest extends TestCase
         $conference = Conference::factory()
             ->has(
                 Event::factory()
-                ->has(
-                    Talk::factory()
-                        ->state([
-                            'title' => $talkName,
-                        ])
-                )
-                ->state([
-                    'name' => $eventName,
-                ])
+                    ->has(
+                        Talk::factory()
+                            ->state([
+                                'title' => $talkName,
+                            ])
+                    )
+                    ->state([
+                        'name' => $eventName,
+                    ])
             )
             ->create();
 

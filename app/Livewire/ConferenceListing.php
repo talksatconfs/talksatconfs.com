@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Livewire;
 
+use Domain\TalksAtConfs\Models\Conference;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Database\Eloquent\Builder;
-use Domain\TalksAtConfs\Models\Conference;
 
 class ConferenceListing extends Component
 {

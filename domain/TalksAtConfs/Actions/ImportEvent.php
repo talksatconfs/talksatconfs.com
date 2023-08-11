@@ -16,7 +16,7 @@ class ImportEvent
     {
     }
 
-    private function getPlaylistFromUrl($url): string|null
+    private function getPlaylistFromUrl($url): ?string
     {
         if (! empty($url)) {
             $urlData = parse_url((string) $url);
@@ -39,7 +39,7 @@ class ImportEvent
     {
         $confData = (new Yaml())->parse(
             Storage::disk('confpad-data')
-            ->get('/conferences/' . $this->year . '/' . $this->filename)
+                ->get('/conferences/' . $this->year . '/' . $this->filename)
         );
 
         $event = Event::firstOrNew([
