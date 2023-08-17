@@ -13,7 +13,6 @@
             <link rel="canonical" href="{{ $canonicalurl }}" />
         @endif
         <x-assets.header />
-        <livewire:styles />
     </x-slot>
 
     <!-- wrapper container:start -->
@@ -30,7 +29,6 @@
         <!-- footer:end -->
 
         <x-assets.footer />
-        <livewire:scripts />
     </div>
     <!-- wrapper container:end -->
 

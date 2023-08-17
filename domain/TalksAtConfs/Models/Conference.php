@@ -128,7 +128,7 @@ class Conference extends TacModel
 
     public function searchableAs(): string
     {
-        return 'conferences_index';
+        return config('app.env') . '_conferences_index';
     }
 
     /**

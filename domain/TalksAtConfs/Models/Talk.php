@@ -132,7 +132,7 @@ class Talk extends TacModel
 
     public function searchableAs(): string
     {
-        return 'talks_index';
+        return config('app.env') . '_talks_index';
     }
 
     public function toSearchableArray(): array

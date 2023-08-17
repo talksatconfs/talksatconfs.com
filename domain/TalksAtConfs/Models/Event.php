@@ -166,7 +166,7 @@ class Event extends TacModel
 
     public function searchableAs(): string
     {
-        return 'events_index';
+        return config('app.env') . '_events_index';
     }
 
     /**

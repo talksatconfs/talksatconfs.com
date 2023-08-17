@@ -34,7 +34,7 @@ class Slide extends TacModel
 
     public function searchableAs(): string
     {
-        return 'slides_index';
+        return config('app.env') . '_slides_index';
     }
 
     /**

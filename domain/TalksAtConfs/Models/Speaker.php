@@ -82,7 +82,7 @@ class Speaker extends TacModel
 
     public function searchableAs(): string
     {
-        return 'speakers_index';
+        return config('app.env') . '_speakers_index';
     }
 
     /**

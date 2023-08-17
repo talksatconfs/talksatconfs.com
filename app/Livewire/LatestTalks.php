@@ -3,15 +3,13 @@
 namespace App\Livewire;
 
 use Domain\TalksAtConfs\Models\Talk;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 
 class LatestTalks extends Component
 {
+    #[Url(history: true)]
     public $latestWithVideo = false;
-
-    protected $queryString = [
-        'latestWithVideo' => ['keep' => true],
-    ];
 
     /**
      * Get the view / contents that represent the component.

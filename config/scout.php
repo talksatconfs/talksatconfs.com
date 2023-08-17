@@ -1,5 +1,10 @@
 <?php
 
+use Domain\TalksAtConfs\Models\Talk;
+use Domain\TalksAtConfs\Models\Event;
+use Domain\TalksAtConfs\Models\Speaker;
+use Domain\TalksAtConfs\Models\Conference;
+
 return [
 
     /*
@@ -145,6 +150,7 @@ return [
                 ],
             ],
             Talk::class => [
+                'sortableAttributes' => ['talk_date'],
                 'rankingRules' => [
                     'words', 'typo', 'proximity', 'attribute', 'sort', 'exactness',
                 ],

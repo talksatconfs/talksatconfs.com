@@ -103,7 +103,7 @@ class Video extends TacModel
 
     public function searchableAs(): string
     {
-        return 'videos_index';
+        return config('app.env') . '_videos_index';
     }
 
     /**
