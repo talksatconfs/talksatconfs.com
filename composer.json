@@ -7,7 +7,7 @@
     "require": {
         "php": "^8.2",
         "blade-ui-kit/blade-ui-kit": "^0.4",
-        "codeat3/blade-phosphor-icons": "^1.4",
+        "codeat3/blade-phosphor-icons": "^2.0",
         "diglactic/laravel-breadcrumbs": "^8.0",
         "enlightn/enlightn": "^2.1",
         "guzzlehttp/guzzle": "^7.2",
