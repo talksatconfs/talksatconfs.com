@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace App\Livewire;
 
-use Domain\TalksAtConfs\Models\Speaker;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
+use Livewire\Attributes\Url;
 use Livewire\WithPagination;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
+use Domain\TalksAtConfs\Models\Speaker;
+use Illuminate\Database\Eloquent\Builder;
 
 class SpeakerListing extends Component
 {
     use WithPagination;
 
+    #[Url(history: true, as: 'q')]
     public $query;
-
-    protected $queryString = ['query'];
 
     public function render(): View|Factory
     {

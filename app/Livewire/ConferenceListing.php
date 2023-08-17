@@ -8,6 +8,7 @@ use Domain\TalksAtConfs\Models\Conference;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,9 +16,8 @@ class ConferenceListing extends Component
 {
     use WithPagination;
 
+    #[Url(history: true, as: 'q')]
     public $query;
-
-    protected $queryString = ['query'];
 
     public function render(): View|Factory
     {
