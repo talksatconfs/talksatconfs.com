@@ -10,6 +10,7 @@
         "codeat3/blade-phosphor-icons": "^1.4",
         "diglactic/laravel-breadcrumbs": "^8.0",
         "enlightn/enlightn": "^2.1",
+        "filament/filament": "^3.0-stable",
         "guzzlehttp/guzzle": "^7.2",
         "http-interop/http-factory-guzzle": "^1.2",
         "laravel/framework": "^10.0",
@@ -61,7 +62,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",

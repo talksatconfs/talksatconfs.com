@@ -9,6 +9,7 @@ use Domain\TalksAtConfs\Database\Factories\EventFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -40,6 +41,7 @@ class Event extends TacModel
     use Notifiable;
     use Searchable;
     use UuidForModel;
+    use SoftDeletes;
 
     protected $guarded = [];
 

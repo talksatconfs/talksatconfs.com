@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 
@@ -29,6 +30,7 @@ class Talk extends TacModel
     use HasFactory;
     use Searchable;
     use UuidForModel;
+    use SoftDeletes;
 
     protected $guarded = [];
 
