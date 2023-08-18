@@ -11,6 +11,7 @@
         "diglactic/laravel-breadcrumbs": "^8.0",
         "enlightn/enlightn": "^2.1",
         "filament/filament": "^3.0-stable",
+        "filament/spatie-laravel-tags-plugin": "^3.0",
         "guzzlehttp/guzzle": "^7.2",
         "http-interop/http-factory-guzzle": "^1.2",
         "laravel/framework": "^10.0",
@@ -24,7 +25,8 @@
         "spatie/laravel-responsecache": "^7.4",
         "spatie/laravel-sitemap": "^6.2",
         "spatie/laravel-tags": "^4.3",
-        "spatie/url": "^2.1"
+        "spatie/url": "^2.1",
+        "squirephp/countries-en": "^3.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",

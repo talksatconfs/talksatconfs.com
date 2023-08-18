@@ -35,6 +35,10 @@ class SpeakerResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')
+                    ->weight(FontWeight::Bold)
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('name')
                     ->weight(FontWeight::Bold)
                     ->searchable()

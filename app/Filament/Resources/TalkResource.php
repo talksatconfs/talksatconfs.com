@@ -12,8 +12,10 @@ use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\TalkResource\Pages;
+use Filament\Forms\Components\SpatieTagsInput;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TalkResource\RelationManagers;
+use Domain\TalksAtConfs\Models\Talk;
 
 class TalkResource extends Resource
 {
@@ -25,9 +27,61 @@ class TalkResource extends Resource
 
     public static function form(Form $form): Form
     {
+
         return $form
             ->schema([
-                //
+                Forms\Components\Group::make()
+                    ->schema([
+                        Forms\Components\Card::make()
+                            ->schema([
+                                Forms\Components\Select::make('event_id')
+                                    ->relationship('event', 'name')
+                                    ->searchable()
+                                    ->required(),
+
+
+                                Forms\Components\DatePicker::make('talk_date')
+                                    ->label('From Date'),
+
+                                Forms\Components\TextInput::make('title')
+                                    ->required()
+                                    ->lazy()
+                                    ->afterStateUpdated(fn (string $context, $state, callable $set) => $context === 'create' ? $set('slug', Str::slug($state)) : null)
+                                    ->columnSpan('full'),
+
+                                Forms\Components\TextInput::make('slug')
+                                    ->disabled()
+                                    ->required()
+                                    ->unique(Talk::class, 'slug', ignoreRecord: true)
+                                    ->columnSpan('full'),
+
+                                Forms\Components\MarkdownEditor::make('description')
+                                    ->required()
+                                    ->columnSpan('full'),
+
+                                SpatieTagsInput::make('tags'),
+                            ])
+                            ->columns(2),
+
+                    ])
+                    ->columnSpan(['lg' => fn (?Talk $record) => $record === null ? 3 : 2]),
+
+                Forms\Components\Card::make()
+                    ->schema([
+                        Forms\Components\Placeholder::make('created_at')
+                            ->label('Created at')
+                            ->content(fn (Talk $record): ?string => $record->created_at?->diffForHumans()),
+
+                        Forms\Components\Placeholder::make('updated_at')
+                            ->label('Last modified at')
+                            ->content(fn (Talk $record): ?string => $record->updated_at?->diffForHumans()),
+                    ])
+                    ->columnSpan(['lg' => 1])
+                    ->hidden(fn (?Talk $record) => $record === null),
+            ])
+            ->columns([
+                'sm' => 1,
+                'lg' => 3,
             ]);
     }
 
@@ -35,6 +89,10 @@ class TalkResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')
+                    ->weight(FontWeight::Bold)
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('title')
                     ->weight(FontWeight::Bold)
                     ->searchable()

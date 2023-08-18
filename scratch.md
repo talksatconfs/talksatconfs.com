@@ -16,6 +16,7 @@ php artisan make:filament-resource Conference --soft-deletes
 ```
 
 ### Relations
+Adding events to conference resource
 ```php
-
+php artisan make:filament-relation-manager ConferenceResource events name
 ```

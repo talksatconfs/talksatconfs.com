@@ -15,6 +15,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Laravel\Nova\Actions\Actionable;
 use Laravel\Scout\Searchable;
+use Spatie\Tags\HasTags;
 use Spatie\Url\Url;
 
 /**
@@ -42,6 +43,7 @@ class Event extends TacModel
     use Searchable;
     use UuidForModel;
     use SoftDeletes;
+    use HasTags;
 
     protected $guarded = [];
 
@@ -50,9 +52,15 @@ class Event extends TacModel
         'to_date' => 'date',
     ];
 
+
     protected static function newFactory(): Factory
     {
         return EventFactory::new();
+    }
+
+    public static function getTagClassName()
+    {
+        return Tag::class;
     }
 
     // Mutators

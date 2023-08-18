@@ -13,6 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
+use Spatie\Tags\HasTags;
 
 /**
  * Domain\TalksAtConfs\Models\Conference
@@ -34,10 +35,11 @@ class Conference extends TacModel
     use Searchable;
     use UuidForModel;
     use SoftDeletes;
+    use HasTags;
 
     protected $guarded = [];
 
-    public function getTagClassName(): string
+    public static function getTagClassName()
     {
         return Tag::class;
     }

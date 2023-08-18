@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
+use Spatie\Tags\HasTags;
 
 /**
  * Domain\TalksAtConfs\Models\Talk
@@ -31,6 +32,7 @@ class Talk extends TacModel
     use Searchable;
     use UuidForModel;
     use SoftDeletes;
+    use HasTags;
 
     protected $guarded = [];
 
@@ -41,6 +43,11 @@ class Talk extends TacModel
     protected static function newFactory(): Factory
     {
         return TalkFactory::new();
+    }
+
+    public static function getTagClassName()
+    {
+        return Tag::class;
     }
 
     // Mutators
