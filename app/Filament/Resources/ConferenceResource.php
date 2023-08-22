@@ -18,6 +18,7 @@ use Filament\Forms\Components\SpatieTagsInput;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ConferenceResource\Pages;
 use App\Filament\Resources\ConferenceResource\RelationManagers;
+use Filament\Resources\RelationManagers\RelationManager;
 
 class ConferenceResource extends Resource
 {
@@ -124,7 +125,8 @@ class ConferenceResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\EventsRelationManager::class
+            RelationManagers\EventsRelationManager::class,
+            RelationManagers\TalksRelationManager::class
         ];
     }
 

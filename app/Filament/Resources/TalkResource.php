@@ -103,6 +103,10 @@ class TalkResource extends Resource
                 TextColumn::make('talk_date')
                     ->dateTime('d M, Y'),
 
+                TextColumn::make('speakers.name')
+                    ->listWithLineBreaks()
+                    ->bulleted(),
+
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
