@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use Livewire\Attributes\Url;
 use Domain\TalksAtConfs\Models\Talk;
+use Livewire\Attributes\Url;
+use Livewire\Component;
 
 class RecentlyAddedTalks extends Component
 {

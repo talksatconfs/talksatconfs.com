@@ -7,8 +7,6 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TalksRelationManager extends RelationManager
 {
@@ -29,7 +27,8 @@ class TalksRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('title')
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('title')
+                    ->wrap(),
                 Tables\Columns\TextColumn::make('event.name')
                     ->description(fn (\Domain\TalksAtConfs\Models\Talk $record): string => 'Conference: ' . $record->event->conference->name),
             ])

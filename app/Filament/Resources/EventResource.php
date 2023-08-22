@@ -2,24 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Squire\Models\Country;
-use Illuminate\Support\Str;
-use Filament\Resources\Resource;
-use Domain\TalksAtConfs\Models\Event;
-use Filament\Support\Enums\FontWeight;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\Layout\Split;
-use Filament\Tables\Columns\Layout\Stack;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\SpatieTagsInput;
 use App\Filament\Resources\EventResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\EventResource\RelationManagers;
 use App\Filament\Resources\EventResource\RelationManagers\TalksRelationManager;
+use Domain\TalksAtConfs\Models\Event;
+use Filament\Forms;
+use Filament\Forms\Components\SpatieTagsInput;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Support\Enums\FontWeight;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
+use Squire\Models\Country;
 
 class EventResource extends Resource
 {
@@ -64,8 +61,6 @@ class EventResource extends Resource
 
                                 Forms\Components\TextInput::make('link')
                                     ->columnSpan('full'),
-
-
 
                                 SpatieTagsInput::make('tags'),
                             ])
@@ -156,7 +151,7 @@ class EventResource extends Resource
     public static function getRelations(): array
     {
         return [
-            TalksRelationManager::class
+            TalksRelationManager::class,
         ];
     }
 

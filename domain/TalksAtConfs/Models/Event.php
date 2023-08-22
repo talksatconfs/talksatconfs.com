@@ -52,7 +52,6 @@ class Event extends TacModel
         'to_date' => 'date',
     ];
 
-
     protected static function newFactory(): Factory
     {
         return EventFactory::new();

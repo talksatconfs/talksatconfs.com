@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use Livewire\Attributes\Url;
-use Livewire\WithPagination;
 use Domain\TalksAtConfs\Models\Event;
 use Illuminate\Database\Eloquent\Builder;
+use Livewire\Attributes\Url;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class EventListing extends Component
 {
@@ -18,7 +18,6 @@ class EventListing extends Component
     public $query;
 
     public $conference;
-
 
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {

@@ -2,20 +2,19 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\TalkResource\Pages;
+use Domain\TalksAtConfs\Models\Talk;
 use Filament\Forms;
-use Filament\Tables;
+use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Illuminate\Support\Str;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\FontWeight;
+use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\TalkResource\Pages;
-use Filament\Forms\Components\SpatieTagsInput;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\TalkResource\RelationManagers;
-use Domain\TalksAtConfs\Models\Talk;
+use Illuminate\Support\Str;
 
 class TalkResource extends Resource
 {
@@ -38,7 +37,6 @@ class TalkResource extends Resource
                                     ->relationship('event', 'name')
                                     ->searchable()
                                     ->required(),
-
 
                                 Forms\Components\DatePicker::make('talk_date')
                                     ->label('From Date'),
