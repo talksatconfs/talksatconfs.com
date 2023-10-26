@@ -138,7 +138,6 @@ class ConferenceResource extends Resource
             'index' => Pages\ListConferences::route('/'),
             'create' => Pages\CreateConference::route('/create'),
             'edit' => Pages\EditConference::route('/{record}/edit'),
-            'most-talks' => Pages\MostTalks::route('/most-talks'),
         ];
     }
 
