@@ -35,7 +35,7 @@ tasks:
     - artisan:optimize
     - artisan:view:cache
     - artisan:down
-    - artisan:migrate
+    - artisan:migrate:talksatconfs
     - npm:install
     - npm:run:prod
     - artisan:tac:generate-sitemap
