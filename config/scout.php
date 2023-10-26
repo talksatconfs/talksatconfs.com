@@ -1,5 +1,10 @@
 <?php
 
+use Domain\TalksAtConfs\Models\Conference;
+use Domain\TalksAtConfs\Models\Event;
+use Domain\TalksAtConfs\Models\Speaker;
+use Domain\TalksAtConfs\Models\Talk;
+
 return [
 
     /*
@@ -132,6 +137,30 @@ return [
     'meilisearch' => [
         'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
         'key' => env('MEILISEARCH_KEY', null),
+        'index-settings' => [
+            Conference::class => [
+                'rankingRules' => [
+                    'words', 'typo', 'proximity', 'attribute', 'sort', 'exactness',
+                ],
+            ],
+            Event::class => [
+                'sortableAttributes' => ['from_date'],
+                'rankingRules' => [
+                    'words', 'typo', 'proximity', 'attribute', 'sort', 'exactness',
+                ],
+            ],
+            Talk::class => [
+                'sortableAttributes' => ['talk_date'],
+                'rankingRules' => [
+                    'words', 'typo', 'proximity', 'attribute', 'sort', 'exactness',
+                ],
+            ],
+            Speaker::class => [
+                'rankingRules' => [
+                    'words', 'typo', 'proximity', 'attribute', 'sort', 'exactness',
+                ],
+            ],
+        ],
     ],
 
 ];

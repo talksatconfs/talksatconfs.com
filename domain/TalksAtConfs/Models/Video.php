@@ -51,7 +51,7 @@ class Video extends TacModel
         return $this->belongsTo(Channel::class);
     }
 
-    public function getVideoEmbedLinkAttribute(): string|null
+    public function getVideoEmbedLinkAttribute(): ?string
     {
         if (in_array($this->source, ['youtube', 'www.youtube.com'])) {
             return 'https://www.youtube.com/embed/' . $this->key;
@@ -103,7 +103,7 @@ class Video extends TacModel
 
     public function searchableAs(): string
     {
-        return 'videos_index';
+        return config('app.env') . '_videos_index';
     }
 
     /**

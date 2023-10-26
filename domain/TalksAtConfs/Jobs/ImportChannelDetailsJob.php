@@ -19,8 +19,7 @@ class ImportChannelDetailsJob implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param string $channel_id // channel id
-     *
+     * @param  string  $channel_id // channel id
      * @return void
      */
     public function __construct(protected string $channel_id)

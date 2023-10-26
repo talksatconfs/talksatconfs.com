@@ -3,9 +3,7 @@
         <div class="px-4 py-4 sm:px-6">
             <div class="flex items-center justify-between">
                 <div class="text-lg font-bold text-indigo-600 truncate">
-                    <a href="{{ $conference->canonical_url }}">
-                        {{ $conference->name }}
-                    </a>
+                    <x-anchor :href="$conference->canonical_url">{{ $conference->name }}</x-anchor>
                 </div>
                 <div class="ml-2 flex-shrink-0 flex">
                     <!-- channel -->
@@ -23,18 +21,16 @@
                         @if(! empty($conference->website))
                         <div class="mt-2 flex items-center text-sm text-gray-500">
                             <x-phosphor-browser-bold class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-700" />
-                            <a href="{{ websiteUrl($conference->website) }}">
+                            <x-anchor :href="websiteUrl($conference->website)">
                                 {{ websiteHost($conference->website, true) }}
-                            </a>
+                            </x-anchor>
                         </div>
                         @endif
 
                         @if(! empty($conference->twitter))
                         <div class="mt-2 flex items-center text-sm text-gray-500">
                             <x-phosphor-twitter-logo-bold class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-700" />
-                            <a href="{{ $conference->twitter_url }}">
-                                {{ $conference->twitter }}
-                            </a>
+                            <x-anchor :href="$conference->twitter_url">{{ $conference->twitter }}</x-anchor>
                         </div>
                         @endif
 
@@ -42,9 +38,7 @@
                         @if(! empty($conference->channel))
                         <div class="mt-2 flex items-center text-sm text-gray-500">
                             <x-phosphor-youtube-logo-bold class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-700" />
-                            <a href="{{ $conference->channel_url }}">
-                                {{ $conference->channel_id }}
-                            </a>
+                            <x-anchor :href="$conference->channel_url">{{ $conference->channel_id }}</x-anchor>
                         </div>
                         @endif
 

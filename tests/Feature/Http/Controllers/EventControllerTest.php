@@ -30,11 +30,11 @@ class EventControllerTest extends TestCase
         Conference::factory()
             ->has(
                 Event::factory()
-                ->state([
-                    'from_date' => '2021-08-28',
-                    'to_date' => '2021-09-10',
-                ])
-                ->has(Talk::factory())
+                    ->state([
+                        'from_date' => '2021-08-28',
+                        'to_date' => '2021-09-10',
+                    ])
+                    ->has(Talk::factory())
             )
             ->create();
 
@@ -51,12 +51,12 @@ class EventControllerTest extends TestCase
         Conference::factory()
             ->has(
                 Event::factory()
-                ->state([
-                    'from_date' => '2021-08-28',
-                    'to_date' => '2021-09-10',
-                ])
-                ->has(Talk::factory()->count($number_of_talks))
-                ->count($number_of_events)
+                    ->state([
+                        'from_date' => '2021-08-28',
+                        'to_date' => '2021-09-10',
+                    ])
+                    ->has(Talk::factory()->count($number_of_talks))
+                    ->count($number_of_events)
             )
             ->create();
 
@@ -96,16 +96,16 @@ class EventControllerTest extends TestCase
         $eventName = 'Dummy Event';
         $talkTitle = 'Dummy Talk Title';
         $event = Event::factory()
-        ->has(
-            Talk::factory()
-                ->state([
-                    'title' => $talkTitle,
-                ])
-        )
-        ->state([
-            'name' => $eventName,
-        ])
-        ->create();
+            ->has(
+                Talk::factory()
+                    ->state([
+                        'title' => $talkTitle,
+                    ])
+            )
+            ->state([
+                'name' => $eventName,
+            ])
+            ->create();
 
         $response = $this->get('/events/' . $event->slug);
 

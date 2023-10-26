@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use Domain\TalksAtConfs\Models\Talk;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 
-class RecentlyAddedTalks extends Component
+class LatestTalks extends Component
 {
-    public $talksWithVideos = false;
+    #[Url(history: true)]
+    public $latestWithVideo = false;
 
     /**
      * Get the view / contents that represent the component.
@@ -16,9 +18,9 @@ class RecentlyAddedTalks extends Component
      */
     public function render()
     {
-        return view('livewire.recently-added-talks', [
-            'talks' => Talk::details()
-                ->sortByCreatedDate()
+        return view('livewire.latest-talks', [
+            'talks' => Talk::details($this->latestWithVideo)
+                ->sortByTalkDate()
                 ->limit(6)
                 ->get(),
         ]);

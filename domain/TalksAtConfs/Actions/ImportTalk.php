@@ -16,10 +16,10 @@ class ImportTalk
     {
         $talk = (new AddTalk())->handle([
             'event_id' => Arr::get($this->data, 'event_id'),
-            'title' =>  Arr::get($this->data, 'title'),
-            'talk_date' =>  Arr::get($this->data, 'talk_date'),
-            'link' =>  Arr::get($this->data, 'link'),
-            'description' =>  Arr::get($this->data, 'description'),
+            'title' => Arr::get($this->data, 'title'),
+            'talk_date' => Arr::get($this->data, 'talk_date'),
+            'link' => Arr::get($this->data, 'link'),
+            'description' => Arr::get($this->data, 'description'),
         ]);
 
         // syncing speakers

@@ -7,6 +7,7 @@ use Domain\TalksAtConfs\Database\Factories\SpeakerFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 
@@ -28,6 +29,7 @@ class Speaker extends TacModel
     use HasFactory;
     use Searchable;
     use UuidForModel;
+    use SoftDeletes;
 
     protected $guarded = [];
 
@@ -82,7 +84,7 @@ class Speaker extends TacModel
 
     public function searchableAs(): string
     {
-        return 'speakers_index';
+        return config('app.env') . '_speakers_index';
     }
 
     /**

@@ -11,38 +11,36 @@
         </div>
         <div class="ml-4">
             <div class="text-sm font-medium text-gray-900">
-                <a href="{{ $speaker->canonical_url }}" class="">
-                    {{ $speaker->name }}
-                </a>
+                <x-anchor :href="$speaker->canonical_url">{{ $speaker->name }}</x-anchor>
             </div>
             <div class="text-sm text-gray-500">{{ $speaker->talks_count }} talks</div>
             <div class="mt-2 flex flex-row space-x-2">
                 @if (!empty($speaker->website))
                     <div class="text-sm text-gray-500">
-                        <a href="{{ $speaker->website }}">
+                        <x-anchor :href="$speaker->website">
                             <x-phosphor-browser-fill class="w-4 h-4 fill-current" />
-                        </a>
+                        </x-anchor>
                     </div>
                 @endif
                 @if (!empty($speaker->twitter))
                     <div class="text-sm text-gray-500">
-                        <a href="{{ $speaker->twitter_link }}">
+                        <x-anchor :href="$speaker->twitter_link">
                             <x-phosphor-twitter-logo-fill class="w-4 h-4 fill-current" />
-                        </a>
+                        </x-anchor>
                     </div>
                 @endif
                 @if (!empty($speaker->github))
                     <div class="text-sm text-gray-500">
-                        <a href="{{ $speaker->github_link }}">
+                        <x-anchor :href="$speaker->github_link">
                             <x-phosphor-github-logo-fill class="w-4 h-4 fill-current" />
-                        </a>
+                        </x-anchor>
                     </div>
                 @endif
                 @if (!empty($speaker->youtube))
                     <div class="text-sm text-gray-500">
-                        <a href="{{ $speaker->youtube_link }}">
+                        <x-anchor :href="$speaker->youtube_link">
                             <x-phosphor-youtube-logo-fill class="w-4 h-4 fill-current" />
-                        </a>
+                        </x-anchor>
                     </div>
                 @endif
             </div>
