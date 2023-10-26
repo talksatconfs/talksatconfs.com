@@ -124,6 +124,10 @@ class EventResource extends Resource
                     ->dateTime('d M, Y')
                     ->sortable(),
 
+                TextColumn::make('talks_count')
+                    ->counts('talks')
+                    ->sortable(),
+
                 TextColumn::make('location'),
                 TextColumn::make('venue'),
                 TextColumn::make('city'),

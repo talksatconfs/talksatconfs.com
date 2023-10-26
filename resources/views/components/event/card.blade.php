@@ -8,14 +8,10 @@
             </div> --}}
             <div class="ml-4">
                 <div class=" text-lg font-semibold text-gray-900">
-                    <a href="{{ $event->canonical_url }}" class="">
-                        {{ $event->name }}
-                    </a>
+                    <x-anchor :href="$event->canonical_url">{{ $event->name }}</x-anchor>
                 </div>
                 <div class="font-medium text-gray-500">
-                    <a href="{{ $event->conference->canonical_url }}" class="">
-                        {{ $event->conference->name }}
-                    </a>
+                    <x-anchor :href="$event->conference->canonical_url">{{ $event->conference->name }}</x-anchor>
                 </div>
             </div>
         </div>

@@ -34,7 +34,6 @@ class SpeakerResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')
-                    ->weight(FontWeight::Bold)
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('name')
@@ -42,6 +41,11 @@ class SpeakerResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->description(fn (\Domain\TalksAtConfs\Models\Speaker $record): string => Str::limit($record?->bio ?? '', 50)),
+
+                 TextColumn::make('talks_count')
+                    ->counts('talks')
+                    ->sortable(),
+
                 TextColumn::make('website'),
                 TextColumn::make('twitter'),
                 TextColumn::make('github'),

@@ -96,6 +96,11 @@ class ConferenceResource extends Resource
                     ->searchable()
                     ->sortable(),
 
+                TextColumn::make('talks_count')
+                    ->counts('talks')
+                    ->sortable(),
+
+
                 TextColumn::make('website'),
                 TextColumn::make('twitter'),
                 TextColumn::make('channel'),
@@ -133,6 +138,7 @@ class ConferenceResource extends Resource
             'index' => Pages\ListConferences::route('/'),
             'create' => Pages\CreateConference::route('/create'),
             'edit' => Pages\EditConference::route('/{record}/edit'),
+            'most-talks' => Pages\MostTalks::route('/most-talks'),
         ];
     }
 
