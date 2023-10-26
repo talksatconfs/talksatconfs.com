@@ -1,9 +1,9 @@
 <?php
 
-use Domain\TalksAtConfs\Models\Talk;
+use Domain\TalksAtConfs\Models\Conference;
 use Domain\TalksAtConfs\Models\Event;
 use Domain\TalksAtConfs\Models\Speaker;
-use Domain\TalksAtConfs\Models\Conference;
+use Domain\TalksAtConfs\Models\Talk;
 
 return [
 

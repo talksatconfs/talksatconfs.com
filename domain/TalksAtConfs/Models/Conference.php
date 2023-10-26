@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
+use Spatie\Tags\HasTags;
 
 /**
  * Domain\TalksAtConfs\Models\Conference
@@ -32,10 +34,12 @@ class Conference extends TacModel
     use Notifiable;
     use Searchable;
     use UuidForModel;
+    use SoftDeletes;
+    use HasTags;
 
     protected $guarded = [];
 
-    public function getTagClassName(): string
+    public static function getTagClassName()
     {
         return Tag::class;
     }
