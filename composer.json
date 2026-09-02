@@ -20,6 +20,7 @@
         "meilisearch/meilisearch-php": "^1.17",
         "spatie/laravel-responsecache": "^8.4",
         "spatie/laravel-sitemap": "^8.2",
+        "spatie/laravel-tags": "^4.12",
         "spatie/url": "^2.1"
     },
     "require-dev": {
