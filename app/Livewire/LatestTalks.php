@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use Domain\TalksAtConfs\Models\Talk;
 use Livewire\Component;
 
-class RecentlyAddedTalks extends Component
+class LatestTalks extends Component
 {
-    public $recentWithVideo = false;
+    public $latestWithVideo = false;
 
-    protected $queryString = ['recentWithVideo'];
+    protected $queryString = ['latestWithVideo'];
 
     /**
      * Get the view / contents that represent the component.
@@ -18,9 +18,9 @@ class RecentlyAddedTalks extends Component
      */
     public function render()
     {
-        return view('livewire.recently-added-talks', [
-            'talks' => Talk::details($this->recentWithVideo)
-                ->sortByCreatedDate()
+        return view('livewire.latest-talks', [
+            'talks' => Talk::details($this->latestWithVideo)
+                ->sortByTalkDate()
                 ->limit(6)
                 ->get(),
         ]);

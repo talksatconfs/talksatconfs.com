@@ -5,7 +5,7 @@
                 <div>
                     <label for="query" class="block text-sm font-medium text-gray-700">Search Events</label>
                     <div class="mt-1 relative rounded-md shadow-sm">
-                        <input wire:model.debounce.500ms="query" type="text"
+                        <input wire:model.live.debounce.500ms="query" type="text"
                             class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
                             placeholder="Search events">
                     </div>

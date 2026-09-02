@@ -5,7 +5,7 @@
                 <div>
                     <label for="query" class="block text-sm font-medium text-gray-700">Search talks</label>
                     <div class="mt-1 relative rounded-md shadow-sm">
-                        <input wire:model.debounce.500ms="query" type="text"
+                        <input wire:model.live.debounce.500ms="query" type="text"
                             class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
                             placeholder="Search talks">
                     </div>
@@ -20,7 +20,7 @@
                         <div class="mt-2 space-y-6">
                             <div class="relative flex gap-x-3">
                                 <div class="flex h-6 items-center">
-                                    <input id="talks-with-videos" wire:model="withVideo" type="checkbox"
+                                    <input id="talks-with-videos" wire:model.live="withVideo" type="checkbox"
                                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                 </div>
                                 <div class="text-sm leading-6">
