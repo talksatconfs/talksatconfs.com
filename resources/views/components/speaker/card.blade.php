@@ -2,8 +2,8 @@
     <div class="flex items-center">
         <div class="flex-shrink-0 h-16 w-16">
             @if (!empty($speaker->search_avatar))
-                <x-buk-avatar class="w-16 h-16 mb-6  object-cover object-center rounded-full"
-                    search="{{ $speaker->search_avatar }}" />
+                <img alt="{{ $speaker->name }}" class="w-16 h-16 mb-6  object-cover object-center rounded-full"
+                    src="https://unavatar.io/{{ $speaker->search_avatar }}">
             @else
                 <img alt="{{ $speaker->name }}" class="w-16 h-16 mb-6 rounded-full"
                     src="{{ Avatar::create($speaker->name)->toBase64() }}">

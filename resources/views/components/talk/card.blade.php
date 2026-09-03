@@ -33,8 +33,8 @@
                 @foreach($talk->speakers as $speaker)
                     <a href="{{ $speaker->canonical_url }}" title="{{ $speaker->name }}" class="">
                     @if(! empty($speaker->search_avatar))
-                        <x-buk-avatar class="inline-block h-10 w-10 rounded-full ring-2 ring-white  object-cover object-center"
-                        search="{{ $speaker->search_avatar }}" />
+                        <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white  object-cover object-center" alt="{{ $speaker->name }}"
+                        src="https://unavatar.io/{{ $speaker->search_avatar }}">
                     @else
                         <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover object-center" alt="{{ $speaker->name }}" src="{{ Avatar::create($speaker->name )->toBase64() }}">
                     @endif

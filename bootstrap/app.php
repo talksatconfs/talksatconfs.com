@@ -1,55 +1,91 @@
 <?php
 
+use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\PreventRequestsDuringMaintenance;
+use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\TrimStrings;
+use App\Http\Middleware\ValidateSignature;
+use App\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Auth\Middleware\Authorize;
+use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
+use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
+use Illuminate\Auth\Middleware\RequirePassword;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
+use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
+use Illuminate\Http\Middleware\HandleCors;
+use Illuminate\Http\Middleware\SetCacheHeaders;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Routing\Middleware\ThrottleRequests;
+use Illuminate\Session\Middleware\AuthenticateSession;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
 |--------------------------------------------------------------------------
 |
-| The first thing we will do is create a new Laravel application instance
-| which serves as the "glue" for all the components of Laravel, and is
-| the IoC container for the system binding all of the various parts.
+| Routing for web/api is still handled by App\Providers\RouteServiceProvider
+| (registered via config/app.php), unchanged from before this upgrade. This
+| file only adds the framework health-check route and command loading, and
+| replaces the old Http/Console Kernel + Exception Handler classes.
 |
 */
 
-$app = new Illuminate\Foundation\Application(
-    $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
-);
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        commands: __DIR__.'/../routes/console.php',
+        health: '/up',
+    )
+    ->withCommands([
+        __DIR__.'/../app/Console/Commands',
+    ])
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->use([
+            HandleCors::class,
+            PreventRequestsDuringMaintenance::class,
+            ValidatePostSize::class,
+            TrimStrings::class,
+            ConvertEmptyStringsToNull::class,
+        ]);
 
-/*
-|--------------------------------------------------------------------------
-| Bind Important Interfaces
-|--------------------------------------------------------------------------
-|
-| Next, we need to bind some important interfaces into the container so
-| we will be able to resolve them when needed. The kernels serve the
-| incoming requests to this application from both the web and CLI.
-|
-*/
+        $middleware->group('web', [
+            EncryptCookies::class,
+            AddQueuedCookiesToResponse::class,
+            StartSession::class,
+            ShareErrorsFromSession::class,
+            VerifyCsrfToken::class,
+            SubstituteBindings::class,
+        ]);
 
-$app->singleton(
-    Illuminate\Contracts\Http\Kernel::class,
-    App\Http\Kernel::class
-);
+        $middleware->group('api', [
+            'throttle:api',
+            SubstituteBindings::class,
+        ]);
 
-$app->singleton(
-    Illuminate\Contracts\Console\Kernel::class,
-    App\Console\Kernel::class
-);
-
-$app->singleton(
-    Illuminate\Contracts\Debug\ExceptionHandler::class,
-    App\Exceptions\Handler::class
-);
-
-/*
-|--------------------------------------------------------------------------
-| Return The Application
-|--------------------------------------------------------------------------
-|
-| This script returns the application instance. The instance is given to
-| the calling script so we can separate the building of the instances
-| from the actual running of the application and sending responses.
-|
-*/
-
-return $app;
+        $middleware->alias([
+            'auth' => Authenticate::class,
+            'auth.basic' => AuthenticateWithBasicAuth::class,
+            'auth.session' => AuthenticateSession::class,
+            'cache.headers' => SetCacheHeaders::class,
+            'can' => Authorize::class,
+            'guest' => RedirectIfAuthenticated::class,
+            'password.confirm' => RequirePassword::class,
+            'signed' => ValidateSignature::class,
+            'throttle' => ThrottleRequests::class,
+            'verified' => EnsureEmailIsVerified::class,
+        ]);
+    })
+    ->withExceptions(function (Exceptions $exceptions) {
+        $exceptions->dontFlash([
+            'current_password',
+            'password',
+            'password_confirmation',
+        ]);
+    })
+    ->create();
