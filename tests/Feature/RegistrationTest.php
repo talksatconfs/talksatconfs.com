@@ -57,4 +57,24 @@ class RegistrationTest extends TestCase
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
+
+    public function test_new_users_cannot_register_with_a_password_shorter_than_eight_characters(): void
+    {
+        if (! Features::enabled(Features::registration())) {
+            $this->markTestSkipped('Registration support is not enabled.');
+
+            return;
+        }
+
+        $response = $this->post('/register', [
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => 'short',
+            'password_confirmation' => 'short',
+            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
+        ]);
+
+        $this->assertGuest();
+        $response->assertSessionHasErrors('password');
+    }
 }
