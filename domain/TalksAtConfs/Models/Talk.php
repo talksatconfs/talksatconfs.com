@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
@@ -66,7 +67,7 @@ class Talk extends TacModel
         return $this->belongsTo(Event::class);
     }
 
-    public function speakers()
+    public function speakers(): BelongsToMany
     {
         return $this->belongsToMany(Speaker::class)
             ->where('name', '<>', '');
@@ -95,7 +96,7 @@ class Talk extends TacModel
         }
     }
 
-    public function videos(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function videos(): BelongsToMany
     {
         return $this->belongsToMany(Video::class);
     }
