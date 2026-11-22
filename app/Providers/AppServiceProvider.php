@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,5 +36,11 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         Model::preventLazyLoading(! $this->app->isProduction());
+
+        Gate::define('viewPulse', fn (User $user): bool => in_array(
+            $user->email,
+            config('pulse.admin_emails', []),
+            true,
+        ));
     }
 }
