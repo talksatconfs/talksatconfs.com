@@ -118,17 +118,6 @@ task('php-fpm:reload', function () {
 task('artisan:queue:restart', artisan('queue:restart'))
     ->desc('Signal queue workers to restart after next job');
 
-/**
- * Build front-end assets (Vite) locally and upload the compiled
- * public/build directory to the release. Avoids needing Node/npm
- * installed on the droplet.
- */
-task('npm:build', function () {
-    runLocally('npm ci');
-    runLocally('npm run build');
-    upload('public/build/', '{{release_path}}/public/build/');
-})->desc('Build front-end assets locally and upload to release');
-
 
 // ═══════════════════════════════════════════════════════════════
 //  7. DEPLOYMENT PIPELINE
@@ -141,7 +130,6 @@ task('deploy', [
 
     // ── Build ──────────────────────────────────────────────────
     'deploy:vendors',        // composer install --no-dev --optimize-autoloader
-    'npm:build',             // build assets locally, upload public/build/ (generates manifest.json)
 
     // ── Wire up shared assets ──────────────────────────────────
     'deploy:shared',         // symlink shared/.env  → release/.env
@@ -170,6 +158,17 @@ task('deploy', [
     'deploy:cleanup',        // delete old releases (keep 5)
     'deploy:success',        // print success message + timing
 ]);
+
+/**
+ * deploy:fix-ownership chowns the whole tree (including .dep/repo) to the app
+ * user, but Deployer connects as root, so git rejects the mirror with
+ * "dubious ownership". Mark it safe before the code is updated.
+ */
+task('deploy:safe-directory', function () {
+    run('git config --global --add safe.directory {{deploy_path}}/.dep/repo');
+})->desc('Mark the git mirror as safe for the deploying user');
+
+before('deploy:update_code', 'deploy:safe-directory');
 
 // Roll back the deploy lock automatically if something fails
 // (prevents your next deploy from erroring with "deploy is locked")
