@@ -6,6 +6,7 @@ import:
     - deploy/icon-cache.php
     - deploy/response-cache.php
     - deploy/horizon-terminate.php
+    - deploy/pulse-restart.php
     - deploy/migrate.php
 
 config:
@@ -47,4 +48,5 @@ tasks:
 
 after:
   # deploy: artisan:horizon:terminate
+  deploy: artisan:pulse:restart
   deploy:failed: deploy:unlock
