@@ -3,14 +3,14 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Traits\RecursiveRefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\UpdateProfileInformationForm;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 class ProfileInformationTest extends TestCase
 {
-    use RefreshDatabase;
+    use RecursiveRefreshDatabase;
 
     public function test_current_profile_information_is_available(): void
     {

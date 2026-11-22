@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Traits\RecursiveRefreshDatabase;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Livewire\Livewire;
@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class CreateApiTokenTest extends TestCase
 {
-    use RefreshDatabase;
+    use RecursiveRefreshDatabase;
 
     public function test_api_tokens_can_be_created(): void
     {

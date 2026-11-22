@@ -3,14 +3,14 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Traits\RecursiveRefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\LogoutOtherBrowserSessionsForm;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 class BrowserSessionsTest extends TestCase
 {
-    use RefreshDatabase;
+    use RecursiveRefreshDatabase;
 
     public function test_other_browser_sessions_can_be_logged_out(): void
     {

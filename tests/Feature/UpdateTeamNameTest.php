@@ -3,14 +3,14 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Traits\RecursiveRefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\UpdateTeamNameForm;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 class UpdateTeamNameTest extends TestCase
 {
-    use RefreshDatabase;
+    use RecursiveRefreshDatabase;
 
     public function test_team_names_can_be_updated(): void
     {

@@ -3,14 +3,14 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Traits\RecursiveRefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\CreateTeamForm;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 class CreateTeamTest extends TestCase
 {
-    use RefreshDatabase;
+    use RecursiveRefreshDatabase;
 
     public function test_teams_can_be_created(): void
     {

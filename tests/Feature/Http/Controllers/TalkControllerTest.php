@@ -8,6 +8,7 @@ use Domain\TalksAtConfs\Models\Event;
 use Domain\TalksAtConfs\Models\Speaker;
 use Domain\TalksAtConfs\Models\Talk;
 use Domain\TalksAtConfs\Models\Video;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Tests\Traits\RecursiveRefreshDatabase;
 
@@ -15,7 +16,7 @@ class TalkControllerTest extends TestCase
 {
     use RecursiveRefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_checks_if_listing_page_loads_when_no_records_exist()
     {
         $response = $this->get('/talks');
@@ -24,7 +25,7 @@ class TalkControllerTest extends TestCase
         $response->assertOk();
     }
 
-    /** @test */
+    #[Test]
     public function it_checks_if_listing_page_loads_when_records_exist()
     {
         $event = Event::factory()->create();
@@ -39,7 +40,7 @@ class TalkControllerTest extends TestCase
         $response->assertOk();
     }
 
-    /** @test */
+    #[Test]
     public function it_checks_if_listing_page_display_expected_data_in_correct_format()
     {
         $event = Event::factory()->create();
@@ -75,7 +76,7 @@ class TalkControllerTest extends TestCase
         $response->assertSee($video2->video_embed_link);
     }
 
-    /** @test */
+    #[Test]
     public function it_checks_if_listing_page_display_expected_data_when_multiple_speakers()
     {
         $event = Event::factory()->create();
@@ -97,7 +98,7 @@ class TalkControllerTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function it_checks_if_single_page_loads()
     {
         $talk = Talk::factory()->create();
@@ -108,7 +109,7 @@ class TalkControllerTest extends TestCase
         $response->assertSee($talk->title);
     }
 
-    /** @test */
+    #[Test]
     public function it_checks_if_single_page_loads_with_no_speakers()
     {
         $talk = Talk::factory()->create();
@@ -118,7 +119,7 @@ class TalkControllerTest extends TestCase
         $response->assertOk();
     }
 
-    /** @test */
+    #[Test]
     public function it_checks_if_single_page_loads_with_speakers()
     {
         $talkTitle = 'Dummy Talk Title';
