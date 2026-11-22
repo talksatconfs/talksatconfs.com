@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Tests\Traits\RecursiveRefreshDatabase;
 use Tests\TestCase;
+use Tests\Traits\RecursiveRefreshDatabase;
 
 class AuthenticationTest extends TestCase
 {

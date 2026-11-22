@@ -3,11 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Tests\Traits\RecursiveRefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Jetstream\Http\Livewire\UpdatePasswordForm;
 use Livewire\Livewire;
 use Tests\TestCase;
+use Tests\Traits\RecursiveRefreshDatabase;
 
 class UpdatePasswordTest extends TestCase
 {

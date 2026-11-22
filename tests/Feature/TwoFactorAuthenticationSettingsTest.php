@@ -3,11 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Tests\Traits\RecursiveRefreshDatabase;
 use Laravel\Fortify\Features;
 use Laravel\Jetstream\Http\Livewire\TwoFactorAuthenticationForm;
 use Livewire\Livewire;
 use Tests\TestCase;
+use Tests\Traits\RecursiveRefreshDatabase;
 
 class TwoFactorAuthenticationSettingsTest extends TestCase
 {

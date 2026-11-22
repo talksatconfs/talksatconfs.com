@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use App\Providers\RouteServiceProvider;
-use Tests\Traits\RecursiveRefreshDatabase;
 use Laravel\Fortify\Features;
 use Laravel\Jetstream\Jetstream;
 use Tests\TestCase;
+use Tests\Traits\RecursiveRefreshDatabase;
 
 class RegistrationTest extends TestCase
 {

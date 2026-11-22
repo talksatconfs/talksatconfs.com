@@ -3,12 +3,12 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Tests\Traits\RecursiveRefreshDatabase;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Livewire\Livewire;
 use Tests\TestCase;
+use Tests\Traits\RecursiveRefreshDatabase;
 
 class DeleteApiTokenTest extends TestCase
 {

@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Tests\Traits\RecursiveRefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\UpdateProfileInformationForm;
 use Livewire\Livewire;
 use Tests\TestCase;
+use Tests\Traits\RecursiveRefreshDatabase;
 
 class ProfileInformationTest extends TestCase
 {

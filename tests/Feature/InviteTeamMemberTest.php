@@ -3,13 +3,13 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Tests\Traits\RecursiveRefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Http\Livewire\TeamMemberManager;
 use Laravel\Jetstream\Mail\TeamInvitation;
 use Livewire\Livewire;
 use Tests\TestCase;
+use Tests\Traits\RecursiveRefreshDatabase;
 
 class InviteTeamMemberTest extends TestCase
 {

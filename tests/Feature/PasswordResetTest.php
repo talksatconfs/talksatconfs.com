@@ -4,10 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
-use Tests\Traits\RecursiveRefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Laravel\Fortify\Features;
 use Tests\TestCase;
+use Tests\Traits\RecursiveRefreshDatabase;
 
 class PasswordResetTest extends TestCase
 {

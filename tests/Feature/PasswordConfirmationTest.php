@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Tests\Traits\RecursiveRefreshDatabase;
 use Tests\TestCase;
+use Tests\Traits\RecursiveRefreshDatabase;
 
 class PasswordConfirmationTest extends TestCase
 {
