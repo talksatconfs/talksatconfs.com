@@ -2,6 +2,7 @@
 
 namespace Domain\TalksAtConfs\Models;
 
+use Domain\TalksAtConfs\Contracts\UuidForModel;
 use Domain\TalksAtConfs\Database\Factories\SlideFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +20,7 @@ class Slide extends TacModel
 {
     use HasFactory;
     use Searchable;
+    use UuidForModel;
 
     protected $guarded = [];
 

@@ -7,6 +7,7 @@ namespace Tests\Feature\Http\Controllers;
 use Domain\TalksAtConfs\Models\Conference;
 use Domain\TalksAtConfs\Models\Event;
 use Domain\TalksAtConfs\Models\Talk;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Tests\Traits\RecursiveRefreshDatabase;
 
@@ -14,7 +15,7 @@ class ConferenceControllerTest extends TestCase
 {
     use RecursiveRefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_checks_if_listing_page_loads_when_no_records_exist()
     {
         $response = $this->get('/conferences');
@@ -24,7 +25,7 @@ class ConferenceControllerTest extends TestCase
         $response->assertOk();
     }
 
-    /** @test */
+    #[Test]
     public function it_checks_if_listing_page_loads_when_records_exists()
     {
         $conference = Conference::factory()
@@ -40,7 +41,7 @@ class ConferenceControllerTest extends TestCase
             ->assertOk();
     }
 
-    /** @test */
+    #[Test]
     public function it_checks_if_listing_page_display_expected_data_in_correct_format()
     {
         $numberOfEvents = 1;
@@ -61,7 +62,7 @@ class ConferenceControllerTest extends TestCase
             ->assertOk();
     }
 
-    /** @test */
+    #[Test]
     public function it_checks_if_single_page_loads()
     {
         $conference = Conference::factory()->create();
@@ -71,7 +72,7 @@ class ConferenceControllerTest extends TestCase
         $response->assertSee($conference->name);
     }
 
-    /** @test */
+    #[Test]
     public function it_checks_if_single_page_loads_with_no_events()
     {
         $conference = Conference::factory()->create();
@@ -83,7 +84,7 @@ class ConferenceControllerTest extends TestCase
             ->assertSee(config('talksatconfs.events.messages.no_records'));
     }
 
-    /** @test */
+    #[Test]
     public function it_checks_if_single_page_loads_with_events()
     {
         $eventName = 'Dummy Event';
@@ -101,7 +102,7 @@ class ConferenceControllerTest extends TestCase
         // $response->assertSee('Number of talks: 0');
     }
 
-    /** @test */
+    #[Test]
     public function it_checks_if_single_page_loads_with_events_and_talks()
     {
         $eventName = 'Dummy Event';
