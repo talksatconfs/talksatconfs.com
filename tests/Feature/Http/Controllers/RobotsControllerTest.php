@@ -16,6 +16,6 @@ class RobotsControllerTest extends TestCase
             ->assertOk()
             ->assertSee('User-agent: *', false)
             ->assertSee('Allow: /', false)
-            ->assertSee(config('talksatconfs.domain') . '/sitemaps/tac/sitemap.xml', false);
+            ->assertSee(config('talksatconfs.domain') . '/sitemap.xml', false);
     }
 }

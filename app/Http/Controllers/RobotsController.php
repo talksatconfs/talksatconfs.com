@@ -14,7 +14,7 @@ Disallow: /nova/
 User-agent: *
 Allow: /
 
-Sitemap: ' . config('talksatconfs.domain') . '/sitemaps/tac/sitemap.xml', 200, [
+Sitemap: ' . config('talksatconfs.domain') . '/sitemap.xml', 200, [
             'Content-type' => 'text',
         ]);
     }

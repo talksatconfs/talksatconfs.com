@@ -9,6 +9,7 @@ return [
     ],
 
     'name' => env('TAC_APP_NAME', 'talksatconfs.com'),
+    'domain' => rtrim((string) env('APP_URL'), '/'),
     'sitemap_path' => 'sitemaps',
 
     'conferences' => [
