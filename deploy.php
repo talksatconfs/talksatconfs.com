@@ -115,6 +115,9 @@ task('php-fpm:reload', function () {
  * so queue workers pick up the new code.
  * Uncomment the line in the pipeline below if you use queues.
  */
+task('artisan:tac:generate-sitemap', artisan('tac:generate-sitemap'))
+    ->desc('Generate sitemap.xml and the entity sitemaps');
+
 task('artisan:queue:restart', artisan('queue:restart'))
     ->desc('Signal queue workers to restart after next job');
 
@@ -144,6 +147,7 @@ task('deploy', [
     'artisan:route:cache',   // php artisan route:cache
     'artisan:view:cache',    // php artisan view:cache
     'artisan:migrate',       // php artisan migrate --force
+    'artisan:tac:generate-sitemap', // sitemap.xml + public/sitemaps (needs APP_URL)
 
     // ── Go live (atomic symlink swap — zero downtime) ──────────
     'deploy:symlink',        // current → /releases/<new>
