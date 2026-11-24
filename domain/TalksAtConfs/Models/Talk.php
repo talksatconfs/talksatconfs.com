@@ -69,7 +69,7 @@ class Talk extends TacModel
     public function speakers()
     {
         return $this->belongsToMany(Speaker::class)
-            ->where('name', '<>', '');
+            ->listed();
     }
 
     public function getSpeakersNamesAttribute()
