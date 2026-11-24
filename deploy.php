@@ -115,19 +115,11 @@ task('php-fpm:reload', function () {
  * so queue workers pick up the new code.
  * Uncomment the line in the pipeline below if you use queues.
  */
+task('artisan:tac:generate-sitemap', artisan('tac:generate-sitemap'))
+    ->desc('Generate sitemap.xml and the entity sitemaps');
+
 task('artisan:queue:restart', artisan('queue:restart'))
     ->desc('Signal queue workers to restart after next job');
-
-/**
- * Build front-end assets (Vite) locally and upload the compiled
- * public/build directory to the release. Avoids needing Node/npm
- * installed on the droplet.
- */
-task('npm:build', function () {
-    runLocally('npm ci');
-    runLocally('npm run build');
-    upload('public/build/', '{{release_path}}/public/build/');
-})->desc('Build front-end assets locally and upload to release');
 
 
 // ═══════════════════════════════════════════════════════════════
@@ -141,7 +133,6 @@ task('deploy', [
 
     // ── Build ──────────────────────────────────────────────────
     'deploy:vendors',        // composer install --no-dev --optimize-autoloader
-    'npm:build',             // build assets locally, upload public/build/ (generates manifest.json)
 
     // ── Wire up shared assets ──────────────────────────────────
     'deploy:shared',         // symlink shared/.env  → release/.env
@@ -156,6 +147,7 @@ task('deploy', [
     'artisan:route:cache',   // php artisan route:cache
     'artisan:view:cache',    // php artisan view:cache
     'artisan:migrate',       // php artisan migrate --force
+    'artisan:tac:generate-sitemap', // sitemap.xml + public/sitemaps (needs APP_URL)
 
     // ── Go live (atomic symlink swap — zero downtime) ──────────
     'deploy:symlink',        // current → /releases/<new>
@@ -170,6 +162,17 @@ task('deploy', [
     'deploy:cleanup',        // delete old releases (keep 5)
     'deploy:success',        // print success message + timing
 ]);
+
+/**
+ * deploy:fix-ownership chowns the whole tree (including .dep/repo) to the app
+ * user, but Deployer connects as root, so git rejects the mirror with
+ * "dubious ownership". Mark it safe before the code is updated.
+ */
+task('deploy:safe-directory', function () {
+    run('git config --global --add safe.directory {{deploy_path}}/.dep/repo');
+})->desc('Mark the git mirror as safe for the deploying user');
+
+before('deploy:update_code', 'deploy:safe-directory');
 
 // Roll back the deploy lock automatically if something fails
 // (prevents your next deploy from erroring with "deploy is locked")
