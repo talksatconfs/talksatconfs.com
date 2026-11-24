@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\SmtpProviders;
+
 return [
 
     /*
@@ -71,12 +73,18 @@ return [
             'transport' => 'array',
         ],
 
+        // Free-tier providers over SMTP (see App\Mail\SmtpProviders), one mailer
+        // per provider that has credentials: smtp-brevo, smtp-mailgun, ...
+        ...SmtpProviders::mailers(),
+
+        // Tries the active providers in order and moves to the next when one
+        // fails (quota exhausted, outage). A provider that just failed is skipped
+        // for MAIL_FAILOVER_RETRY_AFTER seconds. Falls back to `log` only when
+        // no provider has credentials (local development).
         'failover' => [
             'transport' => 'failover',
-            'mailers' => [
-                'smtp',
-                'log',
-            ],
+            'mailers' => SmtpProviders::failoverMailers() ?: ['log'],
+            'retry_after' => (int) env('MAIL_FAILOVER_RETRY_AFTER', 60),
         ],
     ],
 

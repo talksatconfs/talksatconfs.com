@@ -48,6 +48,31 @@
                 </div>
             </div>
             <div class="hidden md:block">
+                <div class="ml-4 flex items-center space-x-3 md:ml-6 text-sm">
+                    @auth
+                        <x-nav-a :href="route('favourites.index')" :active="request()->routeIs('favourites.index')">
+                            Favourites
+                        </x-nav-a>
+                        <x-nav-a :href="route('profile.show')" :active="request()->routeIs('profile.show')">
+                            Profile
+                        </x-nav-a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                                Log out
+                            </button>
+                        </form>
+                    @else
+                        <x-nav-a :href="route('login')" :active="request()->routeIs('login')">
+                            Log in
+                        </x-nav-a>
+                        @if (Route::has('register'))
+                            <x-nav-a :href="route('register')" :active="request()->routeIs('register')">
+                                Sign up
+                            </x-nav-a>
+                        @endif
+                    @endauth
+                </div>
                 {{-- <div class="ml-4 flex items-center md:ml-6">
                     <button type="button"
                         class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
@@ -159,6 +184,31 @@
 
         </div>
         <div class="pt-4 pb-3 border-t border-gray-700">
+            <div class="px-2 space-y-1">
+                @auth
+                    <x-nav-a class="block" :href="route('favourites.index')" :active="request()->routeIs('favourites.index')">
+                        Favourites
+                    </x-nav-a>
+                    <x-nav-a class="block" :href="route('profile.show')" :active="request()->routeIs('profile.show')">
+                        Profile
+                    </x-nav-a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                            Log out
+                        </button>
+                    </form>
+                @else
+                    <x-nav-a class="block" :href="route('login')" :active="request()->routeIs('login')">
+                        Log in
+                    </x-nav-a>
+                    @if (Route::has('register'))
+                        <x-nav-a class="block" :href="route('register')" :active="request()->routeIs('register')">
+                            Sign up
+                        </x-nav-a>
+                    @endif
+                @endauth
+            </div>
             {{-- <div class="flex items-center px-5">
                 <div class="flex-shrink-0">
                     <img class="h-10 w-10 rounded-full"

@@ -9663,7 +9663,7 @@
         },
         {
             "name": "web-auth/webauthn-lib",
-            "version": "5.3.16",
+            "version": "5.3.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-auth/webauthn-lib.git",
@@ -9733,7 +9733,7 @@
                 "webauthn"
             ],
             "support": {
-                "source": "https://github.com/web-auth/webauthn-lib/tree/5.3.16"
+                "source": "https://github.com/web-auth/webauthn-lib/tree/5.3.17"
             },
             "funding": [
                 {
@@ -9746,7 +9746,7 @@
                 }
             ],
             "time": "2026-11-23T18:46:47+00:00",
-            "published-time": "2026-11-23T20:56:31+00:00"
+            "published-time": "2026-11-24T07:58:53+00:00"
         },
         {
             "name": "webmozart/assert",

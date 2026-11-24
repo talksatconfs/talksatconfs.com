@@ -38,6 +38,9 @@
             @endif
         </div>
 
+        <div class="mt-3">
+            <livewire:favourite-button type="event" :id="$event->id" />
+        </div>
     </x-heading>
 
 

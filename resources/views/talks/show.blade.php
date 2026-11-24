@@ -45,6 +45,10 @@
             </div>
             @endif
         </div>
+        <div class="mt-3 flex flex-wrap items-center gap-4">
+            <livewire:favourite-button type="talk" :id="$talk->id" />
+            <livewire:talk-rating :talk-id="$talk->id" />
+        </div>
     </x-heading>
     <x-talk.details :talk="$talk" />
 </x-layouts.page>
