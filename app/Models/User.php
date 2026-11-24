@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -10,7 +13,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -57,4 +60,45 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function favourites(): HasMany
+    {
+        return $this->hasMany(Favourite::class);
+    }
+
+    public function talkRatings(): HasMany
+    {
+        return $this->hasMany(TalkRating::class);
+    }
+
+    public function hasFavourited(Model $model): bool
+    {
+        return $this->favourites()
+            ->where('favouritable_type', $model->getMorphClass())
+            ->where('favouritable_id', $model->getKey())
+            ->exists();
+    }
+
+    /**
+     * Adds or removes the favourite; returns true when the item is now a favourite.
+     */
+    public function toggleFavourite(Model $model): bool
+    {
+        $attributes = [
+            'favouritable_type' => $model->getMorphClass(),
+            'favouritable_id' => $model->getKey(),
+        ];
+
+        $existing = $this->favourites()->where($attributes)->first();
+
+        if ($existing) {
+            $existing->delete();
+
+            return false;
+        }
+
+        $this->favourites()->create($attributes);
+
+        return true;
+    }
 }

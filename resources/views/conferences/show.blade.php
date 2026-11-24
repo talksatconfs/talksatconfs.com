@@ -33,6 +33,10 @@
                 </div>
                 @endif
             </div>
+
+            <div class="mt-3">
+                <livewire:favourite-button type="conference" :id="$conference->id" />
+            </div>
     </x-heading>
 
     <x-conference.details :conference="$conference" />
