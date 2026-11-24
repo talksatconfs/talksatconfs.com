@@ -74,6 +74,15 @@ class Speaker extends TacModel
         return $this->belongsToMany(Talk::class);
     }
 
+    /**
+     * Speakers that can be linked to: placeholder rows with an empty name or
+     * slug have no profile page (speakers.show needs a slug).
+     */
+    public function scopeListed(Builder $query): void
+    {
+        $query->where('name', '<>', '')->where('slug', '<>', '');
+    }
+
     public function scopeDetails(Builder $query): void
     {
         $query->select(['id', 'name', 'slug', 'website', 'github', 'twitter', 'youtube'])

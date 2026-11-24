@@ -28,7 +28,7 @@ class SpeakerSitemap implements SitemapContract
 
     public function generate()
     {
-        Speaker::where('name', '<>', '')->chunk(10, function ($speakers) {
+        Speaker::listed()->chunk(10, function ($speakers) {
             foreach ($speakers as $speaker) {
                 $this->sitemap->add(
                     Url::create(

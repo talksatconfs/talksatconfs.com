@@ -18,10 +18,10 @@ class SpeakerListing extends Component
     {
         if ($this->query) {
             $speakers = Speaker::search($this->query)->query(function (Builder $builder) {
-                $builder->details();
+                $builder->listed()->details();
             });
         } else {
-            $speakers = Speaker::details();
+            $speakers = Speaker::listed()->details();
         }
 
         $speakers = $speakers->paginate(12);
