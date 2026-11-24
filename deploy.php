@@ -118,6 +118,9 @@ task('php-fpm:reload', function () {
 task('artisan:tac:generate-sitemap', artisan('tac:generate-sitemap'))
     ->desc('Generate sitemap.xml and the entity sitemaps');
 
+task('artisan:pulse:restart', artisan('pulse:restart'))
+    ->desc('Signal the pulse:check daemon (systemd: pulse-talksatconfscom) to restart');
+
 task('artisan:queue:restart', artisan('queue:restart'))
     ->desc('Signal queue workers to restart after next job');
 
@@ -155,6 +158,7 @@ task('deploy', [
     // ── Post-live ──────────────────────────────────────────────
     'deploy:fix-ownership',  // chown entire deploy tree to app user
     'php-fpm:reload',        // graceful pool reload (picks up new code)
+    'artisan:pulse:restart', // systemd restarts the pulse:check daemon on new code
     // 'artisan:queue:restart', // ← uncomment if you use Laravel queues
 
     // ── Housekeeping ───────────────────────────────────────────
